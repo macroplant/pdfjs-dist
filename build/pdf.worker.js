@@ -123,8 +123,8 @@ return /******/ (function(modules) { // webpackBootstrap
 "use strict";
 
 
-const pdfjsVersion = '2.5.27';
-const pdfjsBuild = '9d6c226f';
+const pdfjsVersion = '2.5.25';
+const pdfjsBuild = 'cee250af';
 
 const pdfjsCoreWorker = __w_pdfjs_require__(1);
 
@@ -223,7 +223,7 @@ var WorkerMessageHandler = {
     var WorkerTasks = [];
     const verbosity = (0, _util.getVerbosityLevel)();
     const apiVersion = docParams.apiVersion;
-    const workerVersion = '2.5.27';
+    const workerVersion = '2.5.25';
 
     if (apiVersion !== workerVersion) {
       throw new Error(`The API version "${apiVersion}" does not match ` + `the Worker version "${workerVersion}".`);
@@ -2809,40 +2809,6 @@ function isAnnotationRenderable(annotation, intent) {
   return intent === "display" && annotation.viewable || intent === "print" && annotation.printable;
 }
 
-function isAnnotationNotRendered(annotation, annotationsNotRendered = []) {
-  if (!annotation || !annotation.data || !annotation.data.annotationType || !Array.isArray(annotationsNotRendered) || annotationsNotRendered.length == 0) {
-    return false;
-  }
-
-  let data = annotation.data;
-  return annotationsNotRendered.some(itm => {
-    if (typeof itm === 'object') {
-      console.log("isAnnotationRemoved object", itm, data);
-
-      if (Object.keys(itm).length == 0) {
-        return false;
-      }
-
-      let remove = true;
-
-      for (const k in itm) {
-        if (!remove) {
-          continue;
-        } else if (!data.hasOwnProperty(k) || typeof data[k] === 'function' || typeof itm[k] === 'function') {
-          remove = false;
-        } else if (remove) {
-          remove = data[k] === itm[k];
-        }
-      }
-
-      console.log("isAnnotationRemoved object remove", remove);
-      return remove;
-    } else if (typeof itm === 'number') {
-      return itm === data.annotationType;
-    }
-  });
-}
-
 class Page {
   constructor({
     pdfManager,
@@ -3012,8 +2978,7 @@ class Page {
     sink,
     task,
     intent,
-    renderInteractiveForms,
-    annotationsNotRendered
+    renderInteractiveForms
   }) {
     const contentStreamPromise = this.pdfManager.ensure(this, "getContentStream");
     const resourcesPromise = this.loadResources(["ExtGState", "ColorSpace", "Pattern", "Shading", "XObject", "Font"]);
@@ -3055,7 +3020,7 @@ class Page {
       const opListPromises = [];
 
       for (const annotation of annotations) {
-        if (isAnnotationRenderable(annotation, intent) && !isAnnotationNotRendered(annotation, annotationsNotRendered)) {
+        if (isAnnotationRenderable(annotation, intent)) {
           opListPromises.push(annotation.getOperatorList(partialEvaluator, task, renderInteractiveForms));
         }
       }

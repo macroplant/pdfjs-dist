@@ -245,8 +245,8 @@ var _pdf_single_page_viewer = __w_pdfjs_require__(15);
 
 var _pdf_viewer = __w_pdfjs_require__(17);
 
-const pdfjsVersion = '2.5.27';
-const pdfjsBuild = '9d6c226f';
+const pdfjsVersion = '2.5.25';
+const pdfjsBuild = 'cee250af';
 
 /***/ }),
 /* 1 */

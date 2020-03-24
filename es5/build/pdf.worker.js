@@ -123,8 +123,8 @@ return /******/ (function(modules) { // webpackBootstrap
 "use strict";
 
 
-var pdfjsVersion = '2.5.27';
-var pdfjsBuild = '9d6c226f';
+var pdfjsVersion = '2.5.25';
+var pdfjsBuild = 'cee250af';
 
 var pdfjsCoreWorker = __w_pdfjs_require__(1);
 
@@ -235,7 +235,7 @@ var WorkerMessageHandler = {
     var WorkerTasks = [];
     var verbosity = (0, _util.getVerbosityLevel)();
     var apiVersion = docParams.apiVersion;
-    var workerVersion = '2.5.27';
+    var workerVersion = '2.5.25';
 
     if (apiVersion !== workerVersion) {
       throw new Error("The API version \"".concat(apiVersion, "\" does not match ") + "the Worker version \"".concat(workerVersion, "\"."));
@@ -13164,49 +13164,11 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 var DEFAULT_USER_UNIT = 1.0;
 var LETTER_SIZE_MEDIABOX = [0, 0, 612, 792];
 
 function isAnnotationRenderable(annotation, intent) {
   return intent === "display" && annotation.viewable || intent === "print" && annotation.printable;
-}
-
-function isAnnotationNotRendered(annotation) {
-  var annotationsNotRendered = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
-
-  if (!annotation || !annotation.data || !annotation.data.annotationType || !Array.isArray(annotationsNotRendered) || annotationsNotRendered.length == 0) {
-    return false;
-  }
-
-  var data = annotation.data;
-  return annotationsNotRendered.some(function (itm) {
-    if (_typeof(itm) === 'object') {
-      console.log("isAnnotationRemoved object", itm, data);
-
-      if (Object.keys(itm).length == 0) {
-        return false;
-      }
-
-      var remove = true;
-
-      for (var k in itm) {
-        if (!remove) {
-          continue;
-        } else if (!data.hasOwnProperty(k) || typeof data[k] === 'function' || typeof itm[k] === 'function') {
-          remove = false;
-        } else if (remove) {
-          remove = data[k] === itm[k];
-        }
-      }
-
-      console.log("isAnnotationRemoved object remove", remove);
-      return remove;
-    } else if (typeof itm === 'number') {
-      return itm === data.annotationType;
-    }
-  });
 }
 
 var Page = /*#__PURE__*/function () {
@@ -13346,8 +13308,7 @@ var Page = /*#__PURE__*/function () {
           sink = _ref2.sink,
           task = _ref2.task,
           intent = _ref2.intent,
-          renderInteractiveForms = _ref2.renderInteractiveForms,
-          annotationsNotRendered = _ref2.annotationsNotRendered;
+          renderInteractiveForms = _ref2.renderInteractiveForms;
       var contentStreamPromise = this.pdfManager.ensure(this, "getContentStream");
       var resourcesPromise = this.loadResources(["ExtGState", "ColorSpace", "Pattern", "Shading", "XObject", "Font"]);
       var partialEvaluator = new _evaluator.PartialEvaluator({
@@ -13401,7 +13362,7 @@ var Page = /*#__PURE__*/function () {
           for (var _iterator2 = annotations[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
             var annotation = _step2.value;
 
-            if (isAnnotationRenderable(annotation, intent) && !isAnnotationNotRendered(annotation, annotationsNotRendered)) {
+            if (isAnnotationRenderable(annotation, intent)) {
               opListPromises.push(annotation.getOperatorList(partialEvaluator, task, renderInteractiveForms));
             }
           }

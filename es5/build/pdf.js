@@ -123,8 +123,8 @@ return /******/ (function(modules) { // webpackBootstrap
 "use strict";
 
 
-var pdfjsVersion = '2.5.27';
-var pdfjsBuild = '9d6c226f';
+var pdfjsVersion = '2.5.25';
+var pdfjsBuild = 'cee250af';
 
 var pdfjsSharedUtil = __w_pdfjs_require__(1);
 
@@ -10579,7 +10579,7 @@ function _fetchDocument(worker, source, pdfDataRangeTransport, docId) {
 
   return worker.messageHandler.sendWithPromise("GetDocRequest", {
     docId: docId,
-    apiVersion: '2.5.27',
+    apiVersion: '2.5.25',
     source: {
       data: source.data,
       url: source.url,
@@ -11051,9 +11051,7 @@ var PDFPageProxy = /*#__PURE__*/function () {
           _ref3$canvasFactory = _ref3.canvasFactory,
           canvasFactory = _ref3$canvasFactory === void 0 ? null : _ref3$canvasFactory,
           _ref3$background = _ref3.background,
-          background = _ref3$background === void 0 ? null : _ref3$background,
-          _ref3$annotationsNotR = _ref3.annotationsNotRendered,
-          annotationsNotRendered = _ref3$annotationsNotR === void 0 ? [] : _ref3$annotationsNotR;
+          background = _ref3$background === void 0 ? null : _ref3$background;
 
       if (this._stats) {
         this._stats.time("Overall");
@@ -11093,8 +11091,7 @@ var PDFPageProxy = /*#__PURE__*/function () {
         this._pumpOperatorList({
           pageIndex: this._pageIndex,
           intent: renderingIntent,
-          renderInteractiveForms: renderInteractiveForms === true,
-          annotationsNotRendered: annotationsNotRendered
+          renderInteractiveForms: renderInteractiveForms === true
         });
       }
 
@@ -12931,9 +12928,9 @@ var InternalRenderTask = function InternalRenderTaskClosure() {
   return InternalRenderTask;
 }();
 
-var version = '2.5.27';
+var version = '2.5.25';
 exports.version = version;
-var build = '9d6c226f';
+var build = 'cee250af';
 exports.build = build;
 
 /***/ }),
