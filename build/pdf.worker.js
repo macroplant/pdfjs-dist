@@ -123,8 +123,8 @@ return /******/ (function(modules) { // webpackBootstrap
 "use strict";
 
 
-const pdfjsVersion = '2.5.30';
-const pdfjsBuild = '89343cf0';
+const pdfjsVersion = '2.5.51';
+const pdfjsBuild = '8b7f1599';
 
 const pdfjsCoreWorker = __w_pdfjs_require__(1);
 
@@ -223,7 +223,7 @@ var WorkerMessageHandler = {
     var WorkerTasks = [];
     const verbosity = (0, _util.getVerbosityLevel)();
     const apiVersion = docParams.apiVersion;
-    const workerVersion = '2.5.30';
+    const workerVersion = '2.5.51';
 
     if (apiVersion !== workerVersion) {
       throw new Error(`The API version "${apiVersion}" does not match ` + `the Worker version "${workerVersion}".`);
@@ -496,8 +496,11 @@ var WorkerMessageHandler = {
     handler.on("GetPageLabels", function wphSetupGetPageLabels(data) {
       return pdfManager.ensureCatalog("pageLabels");
     });
-    handler.on("GetPageLayout", function wphSetupGetPageLayout(data) {
-      return pdfManager.ensureCatalog("pageLayout");
+    handler.on('GetPageLabelDetails', function wphSetupGetPageLabelDetails(data) {
+      return pdfManager.ensureCatalog('pageLabelDetails');
+    });
+    handler.on('GetPageLayout', function wphSetupGetPageLayout(data) {
+      return pdfManager.ensureCatalog('pageLayout');
     });
     handler.on("GetPageMode", function wphSetupGetPageMode(data) {
       return pdfManager.ensureCatalog("pageMode");
@@ -3851,6 +3854,22 @@ class Catalog {
     return (0, _util.shadow)(this, "pageLabels", obj);
   }
 
+  get pageLabelDetails() {
+    let obj = null;
+
+    try {
+      obj = this._readPageLabelDetails();
+    } catch (ex) {
+      if (ex instanceof _core_utils.MissingDataException) {
+        throw ex;
+      }
+
+      (0, _util.warn)('Unable to read page label details.');
+    }
+
+    return (0, _util.shadow)(this, 'pageLabelDetails', obj);
+  }
+
   _readPageLabels() {
     const obj = this.catDict.getRaw("PageLabels");
 
@@ -3950,7 +3969,90 @@ class Catalog {
           currentLabel = "";
       }
 
-      pageLabels[i] = prefix + currentLabel;
+      pageLabels[i] = {
+        value: prefix + currentLabel,
+        labelDict: labelDict
+      };
+      currentIndex++;
+    }
+
+    return pageLabels;
+  }
+
+  _readPageLabelDetails() {
+    const obj = this.catDict.getRaw('PageLabels');
+
+    if (!obj) {
+      return null;
+    }
+
+    const pageLabels = new Array(this.numPages);
+    let style = null,
+        prefix = '';
+    const numberTree = new NumberTree(obj, this.xref);
+    const nums = numberTree.getAll();
+    let currentIndex = 1;
+
+    for (let i = 0, ii = this.numPages; i < ii; i++) {
+      if (i in nums) {
+        const labelDict = nums[i];
+
+        if (!(0, _primitives.isDict)(labelDict)) {
+          throw new _util.FormatError('PageLabel is not a dictionary.');
+        }
+
+        if (labelDict.has('Type') && !(0, _primitives.isName)(labelDict.get('Type'), 'PageLabel')) {
+          throw new _util.FormatError('Invalid type in PageLabel dictionary.');
+        }
+
+        if (labelDict.has('S')) {
+          const s = labelDict.get('S');
+
+          if (!(0, _primitives.isName)(s)) {
+            throw new _util.FormatError('Invalid style in PageLabel dictionary.');
+          }
+
+          style = {
+            'D': 'decimal_arabic',
+            'R': 'uppercase_roman',
+            'r': 'lowercase_roman',
+            'A': 'uppercase_latin',
+            'a': 'lowercase_latin'
+          }[s.name];
+        } else {
+          style = 'no_style';
+        }
+
+        if (labelDict.has('P')) {
+          const p = labelDict.get('P');
+
+          if (!(0, _util.isString)(p)) {
+            throw new _util.FormatError('Invalid prefix in PageLabel dictionary.');
+          }
+
+          prefix = (0, _util.stringToPDFString)(p);
+        } else {
+          prefix = '';
+        }
+
+        if (labelDict.has('St')) {
+          const st = labelDict.get('St');
+
+          if (!(Number.isInteger(st) && st >= 1)) {
+            throw new _util.FormatError('Invalid start in PageLabel dictionary.');
+          }
+
+          currentIndex = st;
+        } else {
+          currentIndex = 1;
+        }
+      }
+
+      pageLabels[i] = {
+        firstPageNum: currentIndex,
+        prefix: prefix,
+        style: style
+      };
       currentIndex++;
     }
 
