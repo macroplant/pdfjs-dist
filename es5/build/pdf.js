@@ -123,8 +123,8 @@ return /******/ (function(modules) { // webpackBootstrap
 "use strict";
 
 
-var pdfjsVersion = '2.5.34';
-var pdfjsBuild = '06bfc4ede';
+var pdfjsVersion = '2.5.33';
+var pdfjsBuild = '569f7e0b';
 
 var pdfjsSharedUtil = __w_pdfjs_require__(1);
 
@@ -251,13 +251,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
@@ -662,14 +658,12 @@ exports.BaseException = BaseException;
 var PasswordException = /*#__PURE__*/function (_BaseException) {
   _inherits(PasswordException, _BaseException);
 
-  var _super = _createSuper(PasswordException);
-
   function PasswordException(msg, code) {
     var _this;
 
     _classCallCheck(this, PasswordException);
 
-    _this = _super.call(this, msg);
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(PasswordException).call(this, msg));
     _this.code = code;
     return _this;
   }
@@ -682,14 +676,12 @@ exports.PasswordException = PasswordException;
 var UnknownErrorException = /*#__PURE__*/function (_BaseException2) {
   _inherits(UnknownErrorException, _BaseException2);
 
-  var _super2 = _createSuper(UnknownErrorException);
-
   function UnknownErrorException(msg, details) {
     var _this2;
 
     _classCallCheck(this, UnknownErrorException);
 
-    _this2 = _super2.call(this, msg);
+    _this2 = _possibleConstructorReturn(this, _getPrototypeOf(UnknownErrorException).call(this, msg));
     _this2.details = details;
     return _this2;
   }
@@ -702,12 +694,10 @@ exports.UnknownErrorException = UnknownErrorException;
 var InvalidPDFException = /*#__PURE__*/function (_BaseException3) {
   _inherits(InvalidPDFException, _BaseException3);
 
-  var _super3 = _createSuper(InvalidPDFException);
-
   function InvalidPDFException() {
     _classCallCheck(this, InvalidPDFException);
 
-    return _super3.apply(this, arguments);
+    return _possibleConstructorReturn(this, _getPrototypeOf(InvalidPDFException).apply(this, arguments));
   }
 
   return InvalidPDFException;
@@ -718,12 +708,10 @@ exports.InvalidPDFException = InvalidPDFException;
 var MissingPDFException = /*#__PURE__*/function (_BaseException4) {
   _inherits(MissingPDFException, _BaseException4);
 
-  var _super4 = _createSuper(MissingPDFException);
-
   function MissingPDFException() {
     _classCallCheck(this, MissingPDFException);
 
-    return _super4.apply(this, arguments);
+    return _possibleConstructorReturn(this, _getPrototypeOf(MissingPDFException).apply(this, arguments));
   }
 
   return MissingPDFException;
@@ -734,14 +722,12 @@ exports.MissingPDFException = MissingPDFException;
 var UnexpectedResponseException = /*#__PURE__*/function (_BaseException5) {
   _inherits(UnexpectedResponseException, _BaseException5);
 
-  var _super5 = _createSuper(UnexpectedResponseException);
-
   function UnexpectedResponseException(msg, status) {
     var _this3;
 
     _classCallCheck(this, UnexpectedResponseException);
 
-    _this3 = _super5.call(this, msg);
+    _this3 = _possibleConstructorReturn(this, _getPrototypeOf(UnexpectedResponseException).call(this, msg));
     _this3.status = status;
     return _this3;
   }
@@ -754,12 +740,10 @@ exports.UnexpectedResponseException = UnexpectedResponseException;
 var FormatError = /*#__PURE__*/function (_BaseException6) {
   _inherits(FormatError, _BaseException6);
 
-  var _super6 = _createSuper(FormatError);
-
   function FormatError() {
     _classCallCheck(this, FormatError);
 
-    return _super6.apply(this, arguments);
+    return _possibleConstructorReturn(this, _getPrototypeOf(FormatError).apply(this, arguments));
   }
 
   return FormatError;
@@ -770,12 +754,10 @@ exports.FormatError = FormatError;
 var AbortException = /*#__PURE__*/function (_BaseException7) {
   _inherits(AbortException, _BaseException7);
 
-  var _super7 = _createSuper(AbortException);
-
   function AbortException() {
     _classCallCheck(this, AbortException);
 
-    return _super7.apply(this, arguments);
+    return _possibleConstructorReturn(this, _getPrototypeOf(AbortException).apply(this, arguments));
   }
 
   return AbortException;
@@ -10395,11 +10377,11 @@ var _webgl = __w_pdfjs_require__(204);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
 
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
@@ -10407,19 +10389,13 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
 
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
 
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -10603,7 +10579,7 @@ function _fetchDocument(worker, source, pdfDataRangeTransport, docId) {
 
   return worker.messageHandler.sendWithPromise("GetDocRequest", {
     docId: docId,
-    apiVersion: '2.5.34',
+    apiVersion: '2.5.33',
     source: {
       data: source.data,
       url: source.url,
@@ -10720,18 +10696,28 @@ var PDFDataRangeTransport = /*#__PURE__*/function () {
   }, {
     key: "onDataRange",
     value: function onDataRange(begin, chunk) {
-      var _iterator = _createForOfIteratorHelper(this._rangeListeners),
-          _step;
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
 
       try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        for (var _iterator = this._rangeListeners[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var listener = _step.value;
           listener(begin, chunk);
         }
       } catch (err) {
-        _iterator.e(err);
+        _didIteratorError = true;
+        _iteratorError = err;
       } finally {
-        _iterator.f();
+        try {
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
       }
     }
   }, {
@@ -10740,18 +10726,28 @@ var PDFDataRangeTransport = /*#__PURE__*/function () {
       var _this2 = this;
 
       this._readyCapability.promise.then(function () {
-        var _iterator2 = _createForOfIteratorHelper(_this2._progressListeners),
-            _step2;
+        var _iteratorNormalCompletion2 = true;
+        var _didIteratorError2 = false;
+        var _iteratorError2 = undefined;
 
         try {
-          for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          for (var _iterator2 = _this2._progressListeners[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
             var listener = _step2.value;
             listener(loaded, total);
           }
         } catch (err) {
-          _iterator2.e(err);
+          _didIteratorError2 = true;
+          _iteratorError2 = err;
         } finally {
-          _iterator2.f();
+          try {
+            if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
+              _iterator2["return"]();
+            }
+          } finally {
+            if (_didIteratorError2) {
+              throw _iteratorError2;
+            }
+          }
         }
       });
     }
@@ -10761,18 +10757,28 @@ var PDFDataRangeTransport = /*#__PURE__*/function () {
       var _this3 = this;
 
       this._readyCapability.promise.then(function () {
-        var _iterator3 = _createForOfIteratorHelper(_this3._progressiveReadListeners),
-            _step3;
+        var _iteratorNormalCompletion3 = true;
+        var _didIteratorError3 = false;
+        var _iteratorError3 = undefined;
 
         try {
-          for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+          for (var _iterator3 = _this3._progressiveReadListeners[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
             var listener = _step3.value;
             listener(chunk);
           }
         } catch (err) {
-          _iterator3.e(err);
+          _didIteratorError3 = true;
+          _iteratorError3 = err;
         } finally {
-          _iterator3.f();
+          try {
+            if (!_iteratorNormalCompletion3 && _iterator3["return"] != null) {
+              _iterator3["return"]();
+            }
+          } finally {
+            if (_didIteratorError3) {
+              throw _iteratorError3;
+            }
+          }
         }
       });
     }
@@ -10782,18 +10788,28 @@ var PDFDataRangeTransport = /*#__PURE__*/function () {
       var _this4 = this;
 
       this._readyCapability.promise.then(function () {
-        var _iterator4 = _createForOfIteratorHelper(_this4._progressiveDoneListeners),
-            _step4;
+        var _iteratorNormalCompletion4 = true;
+        var _didIteratorError4 = false;
+        var _iteratorError4 = undefined;
 
         try {
-          for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+          for (var _iterator4 = _this4._progressiveDoneListeners[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
             var listener = _step4.value;
             listener();
           }
         } catch (err) {
-          _iterator4.e(err);
+          _didIteratorError4 = true;
+          _iteratorError4 = err;
         } finally {
-          _iterator4.f();
+          try {
+            if (!_iteratorNormalCompletion4 && _iterator4["return"] != null) {
+              _iterator4["return"]();
+            }
+          } finally {
+            if (_didIteratorError4) {
+              throw _iteratorError4;
+            }
+          }
         }
       });
     }
@@ -12915,9 +12931,9 @@ var InternalRenderTask = function InternalRenderTaskClosure() {
   return InternalRenderTask;
 }();
 
-var version = '2.5.34';
+var version = '2.5.33';
 exports.version = version;
-var build = '06bfc4ede';
+var build = '569f7e0b';
 exports.build = build;
 
 /***/ }),
@@ -13567,21 +13583,11 @@ var _util = __w_pdfjs_require__(1);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
@@ -13683,7 +13689,7 @@ var DOMCMapReaderFactory = /*#__PURE__*/function () {
 
       return fetch;
     }( /*#__PURE__*/function () {
-      var _ref3 = _asyncToGenerator( /*#__PURE__*/_regenerator["default"].mark(function _callee2(_ref2) {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/_regenerator["default"].mark(function _callee2(_ref3) {
         var _this = this;
 
         var name, url, compressionType;
@@ -13691,7 +13697,7 @@ var DOMCMapReaderFactory = /*#__PURE__*/function () {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                name = _ref2.name;
+                name = _ref3.name;
 
                 if (this.baseUrl) {
                   _context2.next = 3;
@@ -13826,7 +13832,7 @@ var DOMCMapReaderFactory = /*#__PURE__*/function () {
       }));
 
       return function (_x2) {
-        return _ref3.apply(this, arguments);
+        return _ref2.apply(this, arguments);
       };
     }())
   }]);
@@ -13999,14 +14005,12 @@ exports.PageViewport = PageViewport;
 var RenderingCancelledException = /*#__PURE__*/function (_BaseException) {
   _inherits(RenderingCancelledException, _BaseException);
 
-  var _super = _createSuper(RenderingCancelledException);
-
   function RenderingCancelledException(msg, type) {
     var _this2;
 
     _classCallCheck(this, RenderingCancelledException);
 
-    _this2 = _super.call(this, msg);
+    _this2 = _possibleConstructorReturn(this, _getPrototypeOf(RenderingCancelledException).call(this, msg));
     _this2.type = type;
     return _this2;
   }
@@ -14116,12 +14120,12 @@ var StatTimer = /*#__PURE__*/function () {
     value: function toString() {
       var outBuf = [];
       var longest = 0;
-
-      var _iterator = _createForOfIteratorHelper(this.times),
-          _step;
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
 
       try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        for (var _iterator = this.times[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var time = _step.value;
           var name = time.name;
 
@@ -14130,24 +14134,43 @@ var StatTimer = /*#__PURE__*/function () {
           }
         }
       } catch (err) {
-        _iterator.e(err);
+        _didIteratorError = true;
+        _iteratorError = err;
       } finally {
-        _iterator.f();
+        try {
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
       }
 
-      var _iterator2 = _createForOfIteratorHelper(this.times),
-          _step2;
+      var _iteratorNormalCompletion2 = true;
+      var _didIteratorError2 = false;
+      var _iteratorError2 = undefined;
 
       try {
-        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        for (var _iterator2 = this.times[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
           var _time = _step2.value;
           var duration = _time.end - _time.start;
           outBuf.push("".concat(_time.name.padEnd(longest), " ").concat(duration, "ms\n"));
         }
       } catch (err) {
-        _iterator2.e(err);
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
       } finally {
-        _iterator2.f();
+        try {
+          if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
+            _iterator2["return"]();
+          }
+        } finally {
+          if (_didIteratorError2) {
+            throw _iteratorError2;
+          }
+        }
       }
 
       return outBuf.join("");
@@ -14281,13 +14304,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
@@ -14488,14 +14507,12 @@ exports.FontLoader = FontLoader;
   exports.FontLoader = FontLoader = /*#__PURE__*/function (_BaseFontLoader) {
     _inherits(GenericFontLoader, _BaseFontLoader);
 
-    var _super = _createSuper(GenericFontLoader);
-
     function GenericFontLoader(docId) {
       var _this2;
 
       _classCallCheck(this, GenericFontLoader);
 
-      _this2 = _super.call(this, docId);
+      _this2 = _possibleConstructorReturn(this, _getPrototypeOf(GenericFontLoader).call(this, docId));
       _this2.loadingContext = {
         requests: [],
         nextRequestId: 0
@@ -14816,12 +14833,6 @@ exports.CanvasGraphics = void 0;
 var _util = __w_pdfjs_require__(1);
 
 var _pattern_helper = __w_pdfjs_require__(198);
-
-function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 var MIN_FONT_SIZE = 16;
 var MAX_FONT_SIZE = 100;
@@ -15552,11 +15563,12 @@ var CanvasGraphics = function CanvasGraphicsClosure() {
         if (fnId !== _util.OPS.dependency) {
           this[fnId].apply(this, argsArray[i]);
         } else {
-          var _iterator = _createForOfIteratorHelper(argsArray[i]),
-              _step;
+          var _iteratorNormalCompletion = true;
+          var _didIteratorError = false;
+          var _iteratorError = undefined;
 
           try {
-            for (_iterator.s(); !(_step = _iterator.n()).done;) {
+            for (var _iterator = argsArray[i][Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
               var depObjId = _step.value;
               var objsPool = depObjId.startsWith("g_") ? commonObjs : objs;
 
@@ -15566,9 +15578,18 @@ var CanvasGraphics = function CanvasGraphicsClosure() {
               }
             }
           } catch (err) {
-            _iterator.e(err);
+            _didIteratorError = true;
+            _iteratorError = err;
           } finally {
-            _iterator.f();
+            try {
+              if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+                _iterator["return"]();
+              }
+            } finally {
+              if (_didIteratorError) {
+                throw _iteratorError;
+              }
+            }
           }
         }
 
@@ -17950,19 +17971,13 @@ var _util = __w_pdfjs_require__(1);
 
 var _xml_parser = __w_pdfjs_require__(202);
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
 
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -18073,12 +18088,12 @@ var Metadata = /*#__PURE__*/function () {
     key: "getAll",
     value: function getAll() {
       var obj = Object.create(null);
-
-      var _iterator = _createForOfIteratorHelper(this._metadataMap),
-          _step;
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
 
       try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        for (var _iterator = this._metadataMap[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var _step$value = _slicedToArray(_step.value, 2),
               key = _step$value[0],
               value = _step$value[1];
@@ -18086,9 +18101,18 @@ var Metadata = /*#__PURE__*/function () {
           obj[key] = value;
         }
       } catch (err) {
-        _iterator.e(err);
+        _didIteratorError = true;
+        _iteratorError = err;
       } finally {
-        _iterator.f();
+        try {
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
       }
 
       return obj;
@@ -18119,29 +18143,21 @@ exports.SimpleXMLParser = void 0;
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
 
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
-
-function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
-
-function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
@@ -18531,14 +18547,12 @@ var SimpleDOMNode = /*#__PURE__*/function () {
 var SimpleXMLParser = /*#__PURE__*/function (_XMLParserBase) {
   _inherits(SimpleXMLParser, _XMLParserBase);
 
-  var _super = _createSuper(SimpleXMLParser);
-
   function SimpleXMLParser() {
     var _this2;
 
     _classCallCheck(this, SimpleXMLParser);
 
-    _this2 = _super.call(this);
+    _this2 = _possibleConstructorReturn(this, _getPrototypeOf(SimpleXMLParser).call(this));
     _this2._currentFragment = null;
     _this2._stack = null;
     _this2._errorCode = XMLParserErrorCode.NoError;
@@ -18654,17 +18668,11 @@ var _regenerator = _interopRequireDefault(__w_pdfjs_require__(191));
 
 var _util = __w_pdfjs_require__(1);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -18849,19 +18857,28 @@ var PDFDataTransportStreamReader = /*#__PURE__*/function () {
     this._filename = null;
     this._queuedChunks = queuedChunks || [];
     this._loaded = 0;
-
-    var _iterator = _createForOfIteratorHelper(this._queuedChunks),
-        _step;
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
 
     try {
-      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+      for (var _iterator = this._queuedChunks[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
         var chunk = _step.value;
         this._loaded += chunk.byteLength;
       }
     } catch (err) {
-      _iterator.e(err);
+      _didIteratorError = true;
+      _iteratorError = err;
     } finally {
-      _iterator.f();
+      try {
+        if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+          _iterator["return"]();
+        }
+      } finally {
+        if (_didIteratorError) {
+          throw _iteratorError;
+        }
+      }
     }
 
     this._requests = [];
@@ -20272,25 +20289,15 @@ var _display_utils = __w_pdfjs_require__(194);
 
 var _util = __w_pdfjs_require__(1);
 
-function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
 
 function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
@@ -20527,13 +20534,11 @@ var AnnotationElement = /*#__PURE__*/function () {
 var LinkAnnotationElement = /*#__PURE__*/function (_AnnotationElement) {
   _inherits(LinkAnnotationElement, _AnnotationElement);
 
-  var _super = _createSuper(LinkAnnotationElement);
-
   function LinkAnnotationElement(parameters) {
     _classCallCheck(this, LinkAnnotationElement);
 
     var isRenderable = !!(parameters.data.url || parameters.data.dest || parameters.data.action);
-    return _super.call(this, parameters, isRenderable);
+    return _possibleConstructorReturn(this, _getPrototypeOf(LinkAnnotationElement).call(this, parameters, isRenderable));
   }
 
   _createClass(LinkAnnotationElement, [{
@@ -20602,13 +20607,11 @@ var LinkAnnotationElement = /*#__PURE__*/function (_AnnotationElement) {
 var TextAnnotationElement = /*#__PURE__*/function (_AnnotationElement2) {
   _inherits(TextAnnotationElement, _AnnotationElement2);
 
-  var _super2 = _createSuper(TextAnnotationElement);
-
   function TextAnnotationElement(parameters) {
     _classCallCheck(this, TextAnnotationElement);
 
     var isRenderable = !!(parameters.data.hasPopup || parameters.data.title || parameters.data.contents);
-    return _super2.call(this, parameters, isRenderable);
+    return _possibleConstructorReturn(this, _getPrototypeOf(TextAnnotationElement).call(this, parameters, isRenderable));
   }
 
   _createClass(TextAnnotationElement, [{
@@ -20640,12 +20643,10 @@ var TextAnnotationElement = /*#__PURE__*/function (_AnnotationElement2) {
 var WidgetAnnotationElement = /*#__PURE__*/function (_AnnotationElement3) {
   _inherits(WidgetAnnotationElement, _AnnotationElement3);
 
-  var _super3 = _createSuper(WidgetAnnotationElement);
-
   function WidgetAnnotationElement() {
     _classCallCheck(this, WidgetAnnotationElement);
 
-    return _super3.apply(this, arguments);
+    return _possibleConstructorReturn(this, _getPrototypeOf(WidgetAnnotationElement).apply(this, arguments));
   }
 
   _createClass(WidgetAnnotationElement, [{
@@ -20661,13 +20662,11 @@ var WidgetAnnotationElement = /*#__PURE__*/function (_AnnotationElement3) {
 var TextWidgetAnnotationElement = /*#__PURE__*/function (_WidgetAnnotationElem) {
   _inherits(TextWidgetAnnotationElement, _WidgetAnnotationElem);
 
-  var _super4 = _createSuper(TextWidgetAnnotationElement);
-
   function TextWidgetAnnotationElement(parameters) {
     _classCallCheck(this, TextWidgetAnnotationElement);
 
     var isRenderable = parameters.renderInteractiveForms || !parameters.data.hasAppearance && !!parameters.data.fieldValue;
-    return _super4.call(this, parameters, isRenderable);
+    return _possibleConstructorReturn(this, _getPrototypeOf(TextWidgetAnnotationElement).call(this, parameters, isRenderable));
   }
 
   _createClass(TextWidgetAnnotationElement, [{
@@ -20753,12 +20752,10 @@ var TextWidgetAnnotationElement = /*#__PURE__*/function (_WidgetAnnotationElem) 
 var CheckboxWidgetAnnotationElement = /*#__PURE__*/function (_WidgetAnnotationElem2) {
   _inherits(CheckboxWidgetAnnotationElement, _WidgetAnnotationElem2);
 
-  var _super5 = _createSuper(CheckboxWidgetAnnotationElement);
-
   function CheckboxWidgetAnnotationElement(parameters) {
     _classCallCheck(this, CheckboxWidgetAnnotationElement);
 
-    return _super5.call(this, parameters, parameters.renderInteractiveForms);
+    return _possibleConstructorReturn(this, _getPrototypeOf(CheckboxWidgetAnnotationElement).call(this, parameters, parameters.renderInteractiveForms));
   }
 
   _createClass(CheckboxWidgetAnnotationElement, [{
@@ -20784,12 +20781,10 @@ var CheckboxWidgetAnnotationElement = /*#__PURE__*/function (_WidgetAnnotationEl
 var RadioButtonWidgetAnnotationElement = /*#__PURE__*/function (_WidgetAnnotationElem3) {
   _inherits(RadioButtonWidgetAnnotationElement, _WidgetAnnotationElem3);
 
-  var _super6 = _createSuper(RadioButtonWidgetAnnotationElement);
-
   function RadioButtonWidgetAnnotationElement(parameters) {
     _classCallCheck(this, RadioButtonWidgetAnnotationElement);
 
-    return _super6.call(this, parameters, parameters.renderInteractiveForms);
+    return _possibleConstructorReturn(this, _getPrototypeOf(RadioButtonWidgetAnnotationElement).call(this, parameters, parameters.renderInteractiveForms));
   }
 
   _createClass(RadioButtonWidgetAnnotationElement, [{
@@ -20816,12 +20811,10 @@ var RadioButtonWidgetAnnotationElement = /*#__PURE__*/function (_WidgetAnnotatio
 var PushButtonWidgetAnnotationElement = /*#__PURE__*/function (_LinkAnnotationElemen) {
   _inherits(PushButtonWidgetAnnotationElement, _LinkAnnotationElemen);
 
-  var _super7 = _createSuper(PushButtonWidgetAnnotationElement);
-
   function PushButtonWidgetAnnotationElement() {
     _classCallCheck(this, PushButtonWidgetAnnotationElement);
 
-    return _super7.apply(this, arguments);
+    return _possibleConstructorReturn(this, _getPrototypeOf(PushButtonWidgetAnnotationElement).apply(this, arguments));
   }
 
   _createClass(PushButtonWidgetAnnotationElement, [{
@@ -20840,12 +20833,10 @@ var PushButtonWidgetAnnotationElement = /*#__PURE__*/function (_LinkAnnotationEl
 var ChoiceWidgetAnnotationElement = /*#__PURE__*/function (_WidgetAnnotationElem4) {
   _inherits(ChoiceWidgetAnnotationElement, _WidgetAnnotationElem4);
 
-  var _super8 = _createSuper(ChoiceWidgetAnnotationElement);
-
   function ChoiceWidgetAnnotationElement(parameters) {
     _classCallCheck(this, ChoiceWidgetAnnotationElement);
 
-    return _super8.call(this, parameters, parameters.renderInteractiveForms);
+    return _possibleConstructorReturn(this, _getPrototypeOf(ChoiceWidgetAnnotationElement).call(this, parameters, parameters.renderInteractiveForms));
   }
 
   _createClass(ChoiceWidgetAnnotationElement, [{
@@ -20863,11 +20854,12 @@ var ChoiceWidgetAnnotationElement = /*#__PURE__*/function (_WidgetAnnotationElem
         }
       }
 
-      var _iterator = _createForOfIteratorHelper(this.data.options),
-          _step;
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
 
       try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        for (var _iterator = this.data.options[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var option = _step.value;
           var optionElement = document.createElement("option");
           optionElement.textContent = option.displayValue;
@@ -20880,9 +20872,18 @@ var ChoiceWidgetAnnotationElement = /*#__PURE__*/function (_WidgetAnnotationElem
           selectElement.appendChild(optionElement);
         }
       } catch (err) {
-        _iterator.e(err);
+        _didIteratorError = true;
+        _iteratorError = err;
       } finally {
-        _iterator.f();
+        try {
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
       }
 
       this.container.appendChild(selectElement);
@@ -20896,13 +20897,11 @@ var ChoiceWidgetAnnotationElement = /*#__PURE__*/function (_WidgetAnnotationElem
 var PopupAnnotationElement = /*#__PURE__*/function (_AnnotationElement4) {
   _inherits(PopupAnnotationElement, _AnnotationElement4);
 
-  var _super9 = _createSuper(PopupAnnotationElement);
-
   function PopupAnnotationElement(parameters) {
     _classCallCheck(this, PopupAnnotationElement);
 
     var isRenderable = !!(parameters.data.title || parameters.data.contents);
-    return _super9.call(this, parameters, isRenderable);
+    return _possibleConstructorReturn(this, _getPrototypeOf(PopupAnnotationElement).call(this, parameters, isRenderable));
   }
 
   _createClass(PopupAnnotationElement, [{
@@ -21064,13 +21063,11 @@ var PopupElement = /*#__PURE__*/function () {
 var FreeTextAnnotationElement = /*#__PURE__*/function (_AnnotationElement5) {
   _inherits(FreeTextAnnotationElement, _AnnotationElement5);
 
-  var _super10 = _createSuper(FreeTextAnnotationElement);
-
   function FreeTextAnnotationElement(parameters) {
     _classCallCheck(this, FreeTextAnnotationElement);
 
     var isRenderable = !!(parameters.data.hasPopup || parameters.data.title || parameters.data.contents);
-    return _super10.call(this, parameters, isRenderable, true);
+    return _possibleConstructorReturn(this, _getPrototypeOf(FreeTextAnnotationElement).call(this, parameters, isRenderable, true));
   }
 
   _createClass(FreeTextAnnotationElement, [{
@@ -21092,13 +21089,11 @@ var FreeTextAnnotationElement = /*#__PURE__*/function (_AnnotationElement5) {
 var LineAnnotationElement = /*#__PURE__*/function (_AnnotationElement6) {
   _inherits(LineAnnotationElement, _AnnotationElement6);
 
-  var _super11 = _createSuper(LineAnnotationElement);
-
   function LineAnnotationElement(parameters) {
     _classCallCheck(this, LineAnnotationElement);
 
     var isRenderable = !!(parameters.data.hasPopup || parameters.data.title || parameters.data.contents);
-    return _super11.call(this, parameters, isRenderable, true);
+    return _possibleConstructorReturn(this, _getPrototypeOf(LineAnnotationElement).call(this, parameters, isRenderable, true));
   }
 
   _createClass(LineAnnotationElement, [{
@@ -21131,13 +21126,11 @@ var LineAnnotationElement = /*#__PURE__*/function (_AnnotationElement6) {
 var SquareAnnotationElement = /*#__PURE__*/function (_AnnotationElement7) {
   _inherits(SquareAnnotationElement, _AnnotationElement7);
 
-  var _super12 = _createSuper(SquareAnnotationElement);
-
   function SquareAnnotationElement(parameters) {
     _classCallCheck(this, SquareAnnotationElement);
 
     var isRenderable = !!(parameters.data.hasPopup || parameters.data.title || parameters.data.contents);
-    return _super12.call(this, parameters, isRenderable, true);
+    return _possibleConstructorReturn(this, _getPrototypeOf(SquareAnnotationElement).call(this, parameters, isRenderable, true));
   }
 
   _createClass(SquareAnnotationElement, [{
@@ -21172,13 +21165,11 @@ var SquareAnnotationElement = /*#__PURE__*/function (_AnnotationElement7) {
 var CircleAnnotationElement = /*#__PURE__*/function (_AnnotationElement8) {
   _inherits(CircleAnnotationElement, _AnnotationElement8);
 
-  var _super13 = _createSuper(CircleAnnotationElement);
-
   function CircleAnnotationElement(parameters) {
     _classCallCheck(this, CircleAnnotationElement);
 
     var isRenderable = !!(parameters.data.hasPopup || parameters.data.title || parameters.data.contents);
-    return _super13.call(this, parameters, isRenderable, true);
+    return _possibleConstructorReturn(this, _getPrototypeOf(CircleAnnotationElement).call(this, parameters, isRenderable, true));
   }
 
   _createClass(CircleAnnotationElement, [{
@@ -21213,15 +21204,13 @@ var CircleAnnotationElement = /*#__PURE__*/function (_AnnotationElement8) {
 var PolylineAnnotationElement = /*#__PURE__*/function (_AnnotationElement9) {
   _inherits(PolylineAnnotationElement, _AnnotationElement9);
 
-  var _super14 = _createSuper(PolylineAnnotationElement);
-
   function PolylineAnnotationElement(parameters) {
     var _this3;
 
     _classCallCheck(this, PolylineAnnotationElement);
 
     var isRenderable = !!(parameters.data.hasPopup || parameters.data.title || parameters.data.contents);
-    _this3 = _super14.call(this, parameters, isRenderable, true);
+    _this3 = _possibleConstructorReturn(this, _getPrototypeOf(PolylineAnnotationElement).call(this, parameters, isRenderable, true));
     _this3.containerClassName = "polylineAnnotation";
     _this3.svgElementName = "svg:polyline";
     return _this3;
@@ -21236,21 +21225,30 @@ var PolylineAnnotationElement = /*#__PURE__*/function (_AnnotationElement9) {
       var height = data.rect[3] - data.rect[1];
       var svg = this.svgFactory.create(width, height);
       var points = [];
-
-      var _iterator2 = _createForOfIteratorHelper(data.vertices),
-          _step2;
+      var _iteratorNormalCompletion2 = true;
+      var _didIteratorError2 = false;
+      var _iteratorError2 = undefined;
 
       try {
-        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        for (var _iterator2 = data.vertices[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
           var coordinate = _step2.value;
           var x = coordinate.x - data.rect[0];
           var y = data.rect[3] - coordinate.y;
           points.push(x + "," + y);
         }
       } catch (err) {
-        _iterator2.e(err);
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
       } finally {
-        _iterator2.f();
+        try {
+          if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
+            _iterator2["return"]();
+          }
+        } finally {
+          if (_didIteratorError2) {
+            throw _iteratorError2;
+          }
+        }
       }
 
       points = points.join(" ");
@@ -21274,14 +21272,12 @@ var PolylineAnnotationElement = /*#__PURE__*/function (_AnnotationElement9) {
 var PolygonAnnotationElement = /*#__PURE__*/function (_PolylineAnnotationEl) {
   _inherits(PolygonAnnotationElement, _PolylineAnnotationEl);
 
-  var _super15 = _createSuper(PolygonAnnotationElement);
-
   function PolygonAnnotationElement(parameters) {
     var _this4;
 
     _classCallCheck(this, PolygonAnnotationElement);
 
-    _this4 = _super15.call(this, parameters);
+    _this4 = _possibleConstructorReturn(this, _getPrototypeOf(PolygonAnnotationElement).call(this, parameters));
     _this4.containerClassName = "polygonAnnotation";
     _this4.svgElementName = "svg:polygon";
     return _this4;
@@ -21293,13 +21289,11 @@ var PolygonAnnotationElement = /*#__PURE__*/function (_PolylineAnnotationEl) {
 var CaretAnnotationElement = /*#__PURE__*/function (_AnnotationElement10) {
   _inherits(CaretAnnotationElement, _AnnotationElement10);
 
-  var _super16 = _createSuper(CaretAnnotationElement);
-
   function CaretAnnotationElement(parameters) {
     _classCallCheck(this, CaretAnnotationElement);
 
     var isRenderable = !!(parameters.data.hasPopup || parameters.data.title || parameters.data.contents);
-    return _super16.call(this, parameters, isRenderable, true);
+    return _possibleConstructorReturn(this, _getPrototypeOf(CaretAnnotationElement).call(this, parameters, isRenderable, true));
   }
 
   _createClass(CaretAnnotationElement, [{
@@ -21321,15 +21315,13 @@ var CaretAnnotationElement = /*#__PURE__*/function (_AnnotationElement10) {
 var InkAnnotationElement = /*#__PURE__*/function (_AnnotationElement11) {
   _inherits(InkAnnotationElement, _AnnotationElement11);
 
-  var _super17 = _createSuper(InkAnnotationElement);
-
   function InkAnnotationElement(parameters) {
     var _this5;
 
     _classCallCheck(this, InkAnnotationElement);
 
     var isRenderable = !!(parameters.data.hasPopup || parameters.data.title || parameters.data.contents);
-    _this5 = _super17.call(this, parameters, isRenderable, true);
+    _this5 = _possibleConstructorReturn(this, _getPrototypeOf(InkAnnotationElement).call(this, parameters, isRenderable, true));
     _this5.containerClassName = "inkAnnotation";
     _this5.svgElementName = "svg:polyline";
     return _this5;
@@ -21343,29 +21335,38 @@ var InkAnnotationElement = /*#__PURE__*/function (_AnnotationElement11) {
       var width = data.rect[2] - data.rect[0];
       var height = data.rect[3] - data.rect[1];
       var svg = this.svgFactory.create(width, height);
-
-      var _iterator3 = _createForOfIteratorHelper(data.inkLists),
-          _step3;
+      var _iteratorNormalCompletion3 = true;
+      var _didIteratorError3 = false;
+      var _iteratorError3 = undefined;
 
       try {
-        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+        for (var _iterator3 = data.inkLists[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
           var inkList = _step3.value;
           var points = [];
-
-          var _iterator4 = _createForOfIteratorHelper(inkList),
-              _step4;
+          var _iteratorNormalCompletion4 = true;
+          var _didIteratorError4 = false;
+          var _iteratorError4 = undefined;
 
           try {
-            for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+            for (var _iterator4 = inkList[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
               var coordinate = _step4.value;
               var x = coordinate.x - data.rect[0];
               var y = data.rect[3] - coordinate.y;
               points.push("".concat(x, ",").concat(y));
             }
           } catch (err) {
-            _iterator4.e(err);
+            _didIteratorError4 = true;
+            _iteratorError4 = err;
           } finally {
-            _iterator4.f();
+            try {
+              if (!_iteratorNormalCompletion4 && _iterator4["return"] != null) {
+                _iterator4["return"]();
+              }
+            } finally {
+              if (_didIteratorError4) {
+                throw _iteratorError4;
+              }
+            }
           }
 
           points = points.join(" ");
@@ -21380,9 +21381,18 @@ var InkAnnotationElement = /*#__PURE__*/function (_AnnotationElement11) {
           svg.appendChild(polyline);
         }
       } catch (err) {
-        _iterator3.e(err);
+        _didIteratorError3 = true;
+        _iteratorError3 = err;
       } finally {
-        _iterator3.f();
+        try {
+          if (!_iteratorNormalCompletion3 && _iterator3["return"] != null) {
+            _iterator3["return"]();
+          }
+        } finally {
+          if (_didIteratorError3) {
+            throw _iteratorError3;
+          }
+        }
       }
 
       this.container.append(svg);
@@ -21396,13 +21406,11 @@ var InkAnnotationElement = /*#__PURE__*/function (_AnnotationElement11) {
 var HighlightAnnotationElement = /*#__PURE__*/function (_AnnotationElement12) {
   _inherits(HighlightAnnotationElement, _AnnotationElement12);
 
-  var _super18 = _createSuper(HighlightAnnotationElement);
-
   function HighlightAnnotationElement(parameters) {
     _classCallCheck(this, HighlightAnnotationElement);
 
     var isRenderable = !!(parameters.data.hasPopup || parameters.data.title || parameters.data.contents);
-    return _super18.call(this, parameters, isRenderable, true);
+    return _possibleConstructorReturn(this, _getPrototypeOf(HighlightAnnotationElement).call(this, parameters, isRenderable, true));
   }
 
   _createClass(HighlightAnnotationElement, [{
@@ -21424,13 +21432,11 @@ var HighlightAnnotationElement = /*#__PURE__*/function (_AnnotationElement12) {
 var UnderlineAnnotationElement = /*#__PURE__*/function (_AnnotationElement13) {
   _inherits(UnderlineAnnotationElement, _AnnotationElement13);
 
-  var _super19 = _createSuper(UnderlineAnnotationElement);
-
   function UnderlineAnnotationElement(parameters) {
     _classCallCheck(this, UnderlineAnnotationElement);
 
     var isRenderable = !!(parameters.data.hasPopup || parameters.data.title || parameters.data.contents);
-    return _super19.call(this, parameters, isRenderable, true);
+    return _possibleConstructorReturn(this, _getPrototypeOf(UnderlineAnnotationElement).call(this, parameters, isRenderable, true));
   }
 
   _createClass(UnderlineAnnotationElement, [{
@@ -21452,13 +21458,11 @@ var UnderlineAnnotationElement = /*#__PURE__*/function (_AnnotationElement13) {
 var SquigglyAnnotationElement = /*#__PURE__*/function (_AnnotationElement14) {
   _inherits(SquigglyAnnotationElement, _AnnotationElement14);
 
-  var _super20 = _createSuper(SquigglyAnnotationElement);
-
   function SquigglyAnnotationElement(parameters) {
     _classCallCheck(this, SquigglyAnnotationElement);
 
     var isRenderable = !!(parameters.data.hasPopup || parameters.data.title || parameters.data.contents);
-    return _super20.call(this, parameters, isRenderable, true);
+    return _possibleConstructorReturn(this, _getPrototypeOf(SquigglyAnnotationElement).call(this, parameters, isRenderable, true));
   }
 
   _createClass(SquigglyAnnotationElement, [{
@@ -21480,13 +21484,11 @@ var SquigglyAnnotationElement = /*#__PURE__*/function (_AnnotationElement14) {
 var StrikeOutAnnotationElement = /*#__PURE__*/function (_AnnotationElement15) {
   _inherits(StrikeOutAnnotationElement, _AnnotationElement15);
 
-  var _super21 = _createSuper(StrikeOutAnnotationElement);
-
   function StrikeOutAnnotationElement(parameters) {
     _classCallCheck(this, StrikeOutAnnotationElement);
 
     var isRenderable = !!(parameters.data.hasPopup || parameters.data.title || parameters.data.contents);
-    return _super21.call(this, parameters, isRenderable, true);
+    return _possibleConstructorReturn(this, _getPrototypeOf(StrikeOutAnnotationElement).call(this, parameters, isRenderable, true));
   }
 
   _createClass(StrikeOutAnnotationElement, [{
@@ -21508,13 +21510,11 @@ var StrikeOutAnnotationElement = /*#__PURE__*/function (_AnnotationElement15) {
 var StampAnnotationElement = /*#__PURE__*/function (_AnnotationElement16) {
   _inherits(StampAnnotationElement, _AnnotationElement16);
 
-  var _super22 = _createSuper(StampAnnotationElement);
-
   function StampAnnotationElement(parameters) {
     _classCallCheck(this, StampAnnotationElement);
 
     var isRenderable = !!(parameters.data.hasPopup || parameters.data.title || parameters.data.contents);
-    return _super22.call(this, parameters, isRenderable, true);
+    return _possibleConstructorReturn(this, _getPrototypeOf(StampAnnotationElement).call(this, parameters, isRenderable, true));
   }
 
   _createClass(StampAnnotationElement, [{
@@ -21536,14 +21536,12 @@ var StampAnnotationElement = /*#__PURE__*/function (_AnnotationElement16) {
 var FileAttachmentAnnotationElement = /*#__PURE__*/function (_AnnotationElement17) {
   _inherits(FileAttachmentAnnotationElement, _AnnotationElement17);
 
-  var _super23 = _createSuper(FileAttachmentAnnotationElement);
-
   function FileAttachmentAnnotationElement(parameters) {
     var _this6;
 
     _classCallCheck(this, FileAttachmentAnnotationElement);
 
-    _this6 = _super23.call(this, parameters, true);
+    _this6 = _possibleConstructorReturn(this, _getPrototypeOf(FileAttachmentAnnotationElement).call(this, parameters, true));
     var _this6$data$file = _this6.data.file,
         filename = _this6$data$file.filename,
         content = _this6$data$file.content;
@@ -21603,29 +21601,38 @@ var AnnotationLayer = /*#__PURE__*/function () {
     value: function render(parameters) {
       var sortedAnnotations = [],
           popupAnnotations = [];
-
-      var _iterator5 = _createForOfIteratorHelper(parameters.annotations),
-          _step5;
+      var _iteratorNormalCompletion5 = true;
+      var _didIteratorError5 = false;
+      var _iteratorError5 = undefined;
 
       try {
-        for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
-          var _data = _step5.value;
+        for (var _iterator5 = parameters.annotations[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
+          var data = _step5.value;
 
-          if (!_data) {
+          if (!data) {
             continue;
           }
 
-          if (_data.annotationType === _util.AnnotationType.POPUP) {
-            popupAnnotations.push(_data);
+          if (data.annotationType === _util.AnnotationType.POPUP) {
+            popupAnnotations.push(data);
             continue;
           }
 
-          sortedAnnotations.push(_data);
+          sortedAnnotations.push(data);
         }
       } catch (err) {
-        _iterator5.e(err);
+        _didIteratorError5 = true;
+        _iteratorError5 = err;
       } finally {
-        _iterator5.f();
+        try {
+          if (!_iteratorNormalCompletion5 && _iterator5["return"] != null) {
+            _iterator5["return"]();
+          }
+        } finally {
+          if (_didIteratorError5) {
+            throw _iteratorError5;
+          }
+        }
       }
 
       if (popupAnnotations.length) {
@@ -21633,9 +21640,9 @@ var AnnotationLayer = /*#__PURE__*/function () {
       }
 
       for (var _i = 0, _sortedAnnotations = sortedAnnotations; _i < _sortedAnnotations.length; _i++) {
-        var data = _sortedAnnotations[_i];
+        var _data = _sortedAnnotations[_i];
         var element = AnnotationElementFactory.create({
-          data: data,
+          data: _data,
           layer: parameters.div,
           page: parameters.page,
           viewport: parameters.viewport,
@@ -21654,11 +21661,12 @@ var AnnotationLayer = /*#__PURE__*/function () {
   }, {
     key: "update",
     value: function update(parameters) {
-      var _iterator6 = _createForOfIteratorHelper(parameters.annotations),
-          _step6;
+      var _iteratorNormalCompletion6 = true;
+      var _didIteratorError6 = false;
+      var _iteratorError6 = undefined;
 
       try {
-        for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
+        for (var _iterator6 = parameters.annotations[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
           var data = _step6.value;
           var element = parameters.div.querySelector("[data-annotation-id=\"".concat(data.id, "\"]"));
 
@@ -21667,9 +21675,18 @@ var AnnotationLayer = /*#__PURE__*/function () {
           }
         }
       } catch (err) {
-        _iterator6.e(err);
+        _didIteratorError6 = true;
+        _iteratorError6 = err;
       } finally {
-        _iterator6.f();
+        try {
+          if (!_iteratorNormalCompletion6 && _iterator6["return"] != null) {
+            _iterator6["return"]();
+          }
+        } finally {
+          if (_didIteratorError6) {
+            throw _iteratorError6;
+          }
+        }
       }
 
       parameters.div.removeAttribute("hidden");
@@ -21699,27 +21716,21 @@ var _display_utils = __w_pdfjs_require__(194);
 
 var _is_node = __w_pdfjs_require__(48);
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
 
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
 
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
 
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -21736,12 +21747,12 @@ exports.SVGGraphics = SVGGraphics;
   var opListToTree = function opListToTree(opList) {
     var opTree = [];
     var tmp = [];
-
-    var _iterator = _createForOfIteratorHelper(opList),
-        _step;
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
 
     try {
-      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+      for (var _iterator = opList[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
         var opListElement = _step.value;
 
         if (opListElement.fn === "save") {
@@ -21762,9 +21773,18 @@ exports.SVGGraphics = SVGGraphics;
         }
       }
     } catch (err) {
-      _iterator.e(err);
+      _didIteratorError = true;
+      _iteratorError = err;
     } finally {
-      _iterator.f();
+      try {
+        if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+          _iterator["return"]();
+        }
+      } finally {
+        if (_didIteratorError) {
+          throw _iteratorError;
+        }
+      }
     }
 
     return opTree;
@@ -22139,8 +22159,9 @@ exports.SVGGraphics = SVGGraphics;
             continue;
           }
 
-          var _iterator2 = _createForOfIteratorHelper(argsArray[i]),
-              _step2;
+          var _iteratorNormalCompletion2 = true;
+          var _didIteratorError2 = false;
+          var _iteratorError2 = undefined;
 
           try {
             var _loop = function _loop() {
@@ -22153,13 +22174,22 @@ exports.SVGGraphics = SVGGraphics;
               _this.current.dependencies.push(promise);
             };
 
-            for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+            for (var _iterator2 = argsArray[i][Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
               _loop();
             }
           } catch (err) {
-            _iterator2.e(err);
+            _didIteratorError2 = true;
+            _iteratorError2 = err;
           } finally {
-            _iterator2.f();
+            try {
+              if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
+                _iterator2["return"]();
+              }
+            } finally {
+              if (_didIteratorError2) {
+                throw _iteratorError2;
+              }
+            }
           }
         }
 
@@ -22211,11 +22241,12 @@ exports.SVGGraphics = SVGGraphics;
     }, {
       key: "executeOpTree",
       value: function executeOpTree(opTree) {
-        var _iterator3 = _createForOfIteratorHelper(opTree),
-            _step3;
+        var _iteratorNormalCompletion3 = true;
+        var _didIteratorError3 = false;
+        var _iteratorError3 = undefined;
 
         try {
-          for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+          for (var _iterator3 = opTree[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
             var opTreeElement = _step3.value;
             var fn = opTreeElement.fn;
             var fnId = opTreeElement.fnId;
@@ -22431,9 +22462,18 @@ exports.SVGGraphics = SVGGraphics;
             }
           }
         } catch (err) {
-          _iterator3.e(err);
+          _didIteratorError3 = true;
+          _iteratorError3 = err;
         } finally {
-          _iterator3.f();
+          try {
+            if (!_iteratorNormalCompletion3 && _iterator3["return"] != null) {
+              _iterator3["return"]();
+            }
+          } finally {
+            if (_didIteratorError3) {
+              throw _iteratorError3;
+            }
+          }
         }
       }
     }, {
@@ -22511,12 +22551,12 @@ exports.SVGGraphics = SVGGraphics;
         var vertical = font.vertical;
         var widthAdvanceScale = fontSize * current.fontMatrix[0];
         var x = 0;
-
-        var _iterator4 = _createForOfIteratorHelper(glyphs),
-            _step4;
+        var _iteratorNormalCompletion4 = true;
+        var _didIteratorError4 = false;
+        var _iteratorError4 = undefined;
 
         try {
-          for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+          for (var _iterator4 = glyphs[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
             var glyph = _step4.value;
 
             if (glyph === null) {
@@ -22542,9 +22582,18 @@ exports.SVGGraphics = SVGGraphics;
             x += charWidth;
           }
         } catch (err) {
-          _iterator4.e(err);
+          _didIteratorError4 = true;
+          _iteratorError4 = err;
         } finally {
-          _iterator4.f();
+          try {
+            if (!_iteratorNormalCompletion4 && _iterator4["return"] != null) {
+              _iterator4["return"]();
+            }
+          } finally {
+            if (_didIteratorError4) {
+              throw _iteratorError4;
+            }
+          }
         }
 
         if (vertical) {
@@ -22870,11 +22919,12 @@ exports.SVGGraphics = SVGGraphics;
                 throw new Error("Unknown RadialAxial type: ".concat(args[1]));
             }
 
-            var _iterator5 = _createForOfIteratorHelper(colorStops),
-                _step5;
+            var _iteratorNormalCompletion5 = true;
+            var _didIteratorError5 = false;
+            var _iteratorError5 = undefined;
 
             try {
-              for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+              for (var _iterator5 = colorStops[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
                 var colorStop = _step5.value;
                 var stop = this.svgFactory.createElement("svg:stop");
                 stop.setAttributeNS(null, "offset", colorStop[0]);
@@ -22882,9 +22932,18 @@ exports.SVGGraphics = SVGGraphics;
                 gradient.appendChild(stop);
               }
             } catch (err) {
-              _iterator5.e(err);
+              _didIteratorError5 = true;
+              _iteratorError5 = err;
             } finally {
-              _iterator5.f();
+              try {
+                if (!_iteratorNormalCompletion5 && _iterator5["return"] != null) {
+                  _iterator5["return"]();
+                }
+              } finally {
+                if (_didIteratorError5) {
+                  throw _iteratorError5;
+                }
+              }
             }
 
             this.defs.appendChild(gradient);
@@ -22915,12 +22974,12 @@ exports.SVGGraphics = SVGGraphics;
             y = current.y;
         var d = [];
         var j = 0;
-
-        var _iterator6 = _createForOfIteratorHelper(ops),
-            _step6;
+        var _iteratorNormalCompletion6 = true;
+        var _didIteratorError6 = false;
+        var _iteratorError6 = undefined;
 
         try {
-          for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
+          for (var _iterator6 = ops[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
             var op = _step6.value;
 
             switch (op | 0) {
@@ -22973,9 +23032,18 @@ exports.SVGGraphics = SVGGraphics;
             }
           }
         } catch (err) {
-          _iterator6.e(err);
+          _didIteratorError6 = true;
+          _iteratorError6 = err;
         } finally {
-          _iterator6.f();
+          try {
+            if (!_iteratorNormalCompletion6 && _iterator6["return"] != null) {
+              _iterator6["return"]();
+            }
+          } finally {
+            if (_didIteratorError6) {
+              throw _iteratorError6;
+            }
+          }
         }
 
         d = d.join(" ");
@@ -23079,11 +23147,12 @@ exports.SVGGraphics = SVGGraphics;
     }, {
       key: "setGState",
       value: function setGState(states) {
-        var _iterator7 = _createForOfIteratorHelper(states),
-            _step7;
+        var _iteratorNormalCompletion7 = true;
+        var _didIteratorError7 = false;
+        var _iteratorError7 = undefined;
 
         try {
-          for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
+          for (var _iterator7 = states[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
             var _step7$value = _slicedToArray(_step7.value, 2),
                 key = _step7$value[0],
                 value = _step7$value[1];
@@ -23135,9 +23204,18 @@ exports.SVGGraphics = SVGGraphics;
             }
           }
         } catch (err) {
-          _iterator7.e(err);
+          _didIteratorError7 = true;
+          _iteratorError7 = err;
         } finally {
-          _iterator7.f();
+          try {
+            if (!_iteratorNormalCompletion7 && _iterator7["return"] != null) {
+              _iterator7["return"]();
+            }
+          } finally {
+            if (_didIteratorError7) {
+              throw _iteratorError7;
+            }
+          }
         }
       }
     }, {
@@ -23407,13 +23485,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
@@ -23842,14 +23916,12 @@ function createRequestOptions(parsedUrl, headers) {
 var PDFNodeStreamFullReader = /*#__PURE__*/function (_BaseFullReader) {
   _inherits(PDFNodeStreamFullReader, _BaseFullReader);
 
-  var _super = _createSuper(PDFNodeStreamFullReader);
-
   function PDFNodeStreamFullReader(stream) {
     var _this3;
 
     _classCallCheck(this, PDFNodeStreamFullReader);
 
-    _this3 = _super.call(this, stream);
+    _this3 = _possibleConstructorReturn(this, _getPrototypeOf(PDFNodeStreamFullReader).call(this, stream));
 
     var handleResponse = function handleResponse(response) {
       if (response.statusCode === 404) {
@@ -23908,14 +23980,12 @@ var PDFNodeStreamFullReader = /*#__PURE__*/function (_BaseFullReader) {
 var PDFNodeStreamRangeReader = /*#__PURE__*/function (_BaseRangeReader) {
   _inherits(PDFNodeStreamRangeReader, _BaseRangeReader);
 
-  var _super2 = _createSuper(PDFNodeStreamRangeReader);
-
   function PDFNodeStreamRangeReader(stream, start, end) {
     var _this4;
 
     _classCallCheck(this, PDFNodeStreamRangeReader);
 
-    _this4 = _super2.call(this, stream);
+    _this4 = _possibleConstructorReturn(this, _getPrototypeOf(PDFNodeStreamRangeReader).call(this, stream));
     _this4._httpHeaders = {};
 
     for (var property in stream.httpHeaders) {
@@ -23963,14 +24033,12 @@ var PDFNodeStreamRangeReader = /*#__PURE__*/function (_BaseRangeReader) {
 var PDFNodeStreamFsFullReader = /*#__PURE__*/function (_BaseFullReader2) {
   _inherits(PDFNodeStreamFsFullReader, _BaseFullReader2);
 
-  var _super3 = _createSuper(PDFNodeStreamFsFullReader);
-
   function PDFNodeStreamFsFullReader(stream) {
     var _this5;
 
     _classCallCheck(this, PDFNodeStreamFsFullReader);
 
-    _this5 = _super3.call(this, stream);
+    _this5 = _possibleConstructorReturn(this, _getPrototypeOf(PDFNodeStreamFsFullReader).call(this, stream));
     var path = decodeURIComponent(_this5._url.path);
 
     if (fileUriRegex.test(_this5._url.href)) {
@@ -24005,14 +24073,12 @@ var PDFNodeStreamFsFullReader = /*#__PURE__*/function (_BaseFullReader2) {
 var PDFNodeStreamFsRangeReader = /*#__PURE__*/function (_BaseRangeReader2) {
   _inherits(PDFNodeStreamFsRangeReader, _BaseRangeReader2);
 
-  var _super4 = _createSuper(PDFNodeStreamFsRangeReader);
-
   function PDFNodeStreamFsRangeReader(stream, start, end) {
     var _this6;
 
     _classCallCheck(this, PDFNodeStreamFsRangeReader);
 
-    _this6 = _super4.call(this, stream);
+    _this6 = _possibleConstructorReturn(this, _getPrototypeOf(PDFNodeStreamFsRangeReader).call(this, stream));
     var path = decodeURIComponent(_this6._url.path);
 
     if (fileUriRegex.test(_this6._url.href)) {
@@ -24133,15 +24199,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getFilenameFromContentDispositionHeader = getFilenameFromContentDispositionHeader;
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
 
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
@@ -25191,7 +25253,7 @@ var PDFFetchStreamReader = /*#__PURE__*/function () {
     key: "read",
     value: function () {
       var _read = _asyncToGenerator( /*#__PURE__*/_regenerator["default"].mark(function _callee() {
-        var _yield$this$_reader$r, value, done, buffer;
+        var _ref, value, done, buffer;
 
         return _regenerator["default"].wrap(function _callee$(_context) {
           while (1) {
@@ -25205,9 +25267,9 @@ var PDFFetchStreamReader = /*#__PURE__*/function () {
                 return this._reader.read();
 
               case 4:
-                _yield$this$_reader$r = _context.sent;
-                value = _yield$this$_reader$r.value;
-                done = _yield$this$_reader$r.done;
+                _ref = _context.sent;
+                value = _ref.value;
+                done = _ref.done;
 
                 if (!done) {
                   _context.next = 9;
@@ -25329,7 +25391,7 @@ var PDFFetchStreamRangeReader = /*#__PURE__*/function () {
     key: "read",
     value: function () {
       var _read2 = _asyncToGenerator( /*#__PURE__*/_regenerator["default"].mark(function _callee2() {
-        var _yield$this$_reader$r2, value, done, buffer;
+        var _ref2, value, done, buffer;
 
         return _regenerator["default"].wrap(function _callee2$(_context2) {
           while (1) {
@@ -25343,9 +25405,9 @@ var PDFFetchStreamRangeReader = /*#__PURE__*/function () {
                 return this._reader.read();
 
               case 4:
-                _yield$this$_reader$r2 = _context2.sent;
-                value = _yield$this$_reader$r2.value;
-                done = _yield$this$_reader$r2.done;
+                _ref2 = _context2.sent;
+                value = _ref2.value;
+                done = _ref2.done;
 
                 if (!done) {
                   _context2.next = 9;

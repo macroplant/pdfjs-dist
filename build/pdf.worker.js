@@ -123,8 +123,8 @@ return /******/ (function(modules) { // webpackBootstrap
 "use strict";
 
 
-const pdfjsVersion = '2.5.34';
-const pdfjsBuild = '06bfc4ede';
+const pdfjsVersion = '2.5.32';
+const pdfjsBuild = '91675b22';
 
 const pdfjsCoreWorker = __w_pdfjs_require__(1);
 
@@ -223,7 +223,7 @@ var WorkerMessageHandler = {
     var WorkerTasks = [];
     const verbosity = (0, _util.getVerbosityLevel)();
     const apiVersion = docParams.apiVersion;
-    const workerVersion = '2.5.34';
+    const workerVersion = '2.5.32';
 
     if (apiVersion !== workerVersion) {
       throw new Error(`The API version "${apiVersion}" does not match ` + `the Worker version "${workerVersion}".`);
@@ -551,7 +551,8 @@ var WorkerMessageHandler = {
           sink,
           task,
           intent: data.intent,
-          renderInteractiveForms: data.renderInteractiveForms
+          renderInteractiveForms: data.renderInteractiveForms,
+          annotationsNotRendered: data.annotationsNotRendered
         }).then(function (operatorListInfo) {
           finishWorkerTask(task);
 
@@ -2809,13 +2810,35 @@ function isAnnotationRenderable(annotation, intent) {
   return intent === "display" && annotation.viewable || intent === "print" && annotation.printable;
 }
 
-function isAnnotationRemoved(annotationsForRemoval, annotation) {
-  if (!annotation || !annotation.data.annotationType) {
-    return;
+function isAnnotationNotRendered(annotation, annotationsNotRendered) {
+  if (!annotation || !annotation.data || !annotation.data.annotationType || !Array.isArray(annotationsNotRendered) || annotationsNotRendered.length == 0) {
+    return false;
   }
 
   let data = annotation.data;
-  return annotationsForRemoval.some(itm => itm === data.annotationType || itm === data.fieldType || itm === 'STx' && data.annotationType === 20 && data.fieldType === 'Tx' && !data.multiLine || itm === 'MTx' && data.annotationType === 20 && data.fieldType === 'Tx' && data.multiLine || itm === 'ABtn' && data.annotationType === 20 && data.fieldType === 'Btn' && !data.radioButton && !data.checkBox || itm === 'CBtn' && data.annotationType === 20 && data.fieldType === 'Btn' && data.checkBox || itm === 'RBtn' && data.annotationType === 20 && data.fieldType === 'Btn' && data.radioButton || itm === 'CCh' && data.annotationType === 20 && data.fieldType === 'Ch' && data.combo || itm === 'LCh' && data.annotationType === 20 && data.fieldType === 'Ch' && !data.combo);
+  return annotationsNotRendered.some(itm => {
+    if (typeof itm === 'object') {
+      if (Object.keys(itm).length == 0) {
+        return false;
+      }
+
+      let remove = true;
+
+      for (const k in itm) {
+        if (!remove) {
+          continue;
+        } else if (!data.hasOwnProperty(k) || typeof data[k] === 'function' || typeof itm[k] === 'function') {
+          remove = false;
+        } else if (remove) {
+          remove = data[k] === itm[k];
+        }
+      }
+
+      return remove;
+    } else if (typeof itm === 'number') {
+      return itm === data.annotationType;
+    }
+  });
 }
 
 class Page {
@@ -3030,9 +3053,7 @@ class Page {
       const opListPromises = [];
 
       for (const annotation of annotations) {
-        if (Array.isArray(annotationsNotRendered) && isAnnotationRemoved(annotationsNotRendered, annotation)) {
-          continue;
-        } else if (isAnnotationRenderable(annotation, intent)) {
+        if (isAnnotationRenderable(annotation, intent) && !isAnnotationNotRendered(annotation, annotationsNotRendered)) {
           opListPromises.push(annotation.getOperatorList(partialEvaluator, task, renderInteractiveForms));
         }
       }
@@ -27174,7 +27195,7 @@ var Font = function FontClosure() {
         unicode = String.fromCharCode(unicode);
       }
 
-      var isInFont = (charcode in this.toFontChar);
+      var isInFont = charcode in this.toFontChar;
       fontCharCode = this.toFontChar[charcode] || charcode;
 
       if (this.missingFile) {
