@@ -125,7 +125,7 @@ class WorkerMessageHandler {
     const WorkerTasks = [];
     const verbosity = (0, _util.getVerbosityLevel)();
     const apiVersion = docParams.apiVersion;
-    const workerVersion = '2.11.17';
+    const workerVersion = '2.11.18';
 
     if (apiVersion !== workerVersion) {
       throw new Error(`The API version "${apiVersion}" does not match ` + `the Worker version "${workerVersion}".`);
@@ -3492,37 +3492,6 @@ function isAnnotationRenderable(annotation, annotationStorage, annotationIntent)
   return annotationIntent === "display" && annotation.mustBeViewed(annotationStorage) || annotationIntent === "print" && annotation.mustBePrinted(annotationStorage);
 }
 
-function isAnnotationNotRendered(annotation, annotationsNotRendered) {
-  if (!annotation || !annotation.data || !annotation.data.annotationType || !Array.isArray(annotationsNotRendered) || annotationsNotRendered.length == 0) {
-    return false;
-  }
-
-  let data = annotation.data;
-  return annotationsNotRendered.some(itm => {
-    if (typeof itm === 'object') {
-      if (Object.keys(itm).length == 0) {
-        return false;
-      }
-
-      let remove = true;
-
-      for (const k in itm) {
-        if (!remove) {
-          continue;
-        } else if (!data.hasOwnProperty(k) || typeof data[k] === 'function' || typeof itm[k] === 'function') {
-          remove = false;
-        } else if (remove) {
-          remove = data[k] === itm[k];
-        }
-      }
-
-      return remove;
-    } else if (typeof itm === 'number') {
-      return itm === data.annotationType;
-    }
-  });
-}
-
 class Page {
   constructor({
     pdfManager,
@@ -3796,7 +3765,7 @@ class Page {
       const opListPromises = [];
 
       for (const annotation of annotations) {
-        if (isAnnotationRenderable(annotation, annotationStorage, annotationIntent) && !isAnnotationNotRendered(annotation, annotationsNotRendered)) {
+        if (isAnnotationRenderable(annotation, annotationStorage, annotationIntent) && !annotationsNotRendered.includes(annotation.id)) {
           opListPromises.push(annotation.getOperatorList(partialEvaluator, task, renderInteractiveForms, annotationStorage).catch(function (reason) {
             (0, _util.warn)("getOperatorList - ignoring annotation data during " + `"${task.name}" task: "${reason}".`);
             return null;
@@ -72029,8 +71998,8 @@ Object.defineProperty(exports, "WorkerMessageHandler", ({
 
 var _worker = __w_pdfjs_require__(1);
 
-const pdfjsVersion = '2.11.17';
-const pdfjsBuild = '32c3c6395';
+const pdfjsVersion = '2.11.18';
+const pdfjsBuild = '54005a5d6';
 })();
 
 /******/ 	return __webpack_exports__;

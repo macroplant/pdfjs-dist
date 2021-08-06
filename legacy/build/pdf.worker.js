@@ -173,7 +173,7 @@ var WorkerMessageHandler = /*#__PURE__*/function () {
       var WorkerTasks = [];
       var verbosity = (0, _util.getVerbosityLevel)();
       var apiVersion = docParams.apiVersion;
-      var workerVersion = '2.11.17';
+      var workerVersion = '2.11.18';
 
       if (apiVersion !== workerVersion) {
         throw new Error("The API version \"".concat(apiVersion, "\" does not match ") + "the Worker version \"".concat(workerVersion, "\"."));
@@ -12069,6 +12069,8 @@ exports.NullStream = NullStream;
 "use strict";
 
 
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
@@ -12150,44 +12152,11 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 var DEFAULT_USER_UNIT = 1.0;
 var LETTER_SIZE_MEDIABOX = [0, 0, 612, 792];
 
 function isAnnotationRenderable(annotation, annotationStorage, annotationIntent) {
   return annotationIntent === "display" && annotation.mustBeViewed(annotationStorage) || annotationIntent === "print" && annotation.mustBePrinted(annotationStorage);
-}
-
-function isAnnotationNotRendered(annotation, annotationsNotRendered) {
-  if (!annotation || !annotation.data || !annotation.data.annotationType || !Array.isArray(annotationsNotRendered) || annotationsNotRendered.length == 0) {
-    return false;
-  }
-
-  var data = annotation.data;
-  return annotationsNotRendered.some(function (itm) {
-    if (_typeof(itm) === 'object') {
-      if (Object.keys(itm).length == 0) {
-        return false;
-      }
-
-      var remove = true;
-
-      for (var k in itm) {
-        if (!remove) {
-          continue;
-        } else if (!data.hasOwnProperty(k) || typeof data[k] === 'function' || typeof itm[k] === 'function') {
-          remove = false;
-        } else if (remove) {
-          remove = data[k] === itm[k];
-        }
-      }
-
-      return remove;
-    } else if (typeof itm === 'number') {
-      return itm === data.annotationType;
-    }
-  });
 }
 
 var Page = /*#__PURE__*/function () {
@@ -12525,7 +12494,7 @@ var Page = /*#__PURE__*/function () {
           for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
             var annotation = _step2.value;
 
-            if (isAnnotationRenderable(annotation, annotationStorage, annotationIntent) && !isAnnotationNotRendered(annotation, annotationsNotRendered)) {
+            if (isAnnotationRenderable(annotation, annotationStorage, annotationIntent) && !annotationsNotRendered.includes(annotation.id)) {
               opListPromises.push(annotation.getOperatorList(partialEvaluator, task, renderInteractiveForms, annotationStorage)["catch"](function (reason) {
                 (0, _util.warn)("getOperatorList - ignoring annotation data during " + "\"".concat(task.name, "\" task: \"").concat(reason, "\"."));
                 return null;
@@ -92559,8 +92528,8 @@ Object.defineProperty(exports, "WorkerMessageHandler", ({
 
 var _worker = __w_pdfjs_require__(1);
 
-var pdfjsVersion = '2.11.17';
-var pdfjsBuild = '32c3c6395';
+var pdfjsVersion = '2.11.18';
+var pdfjsBuild = '54005a5d6';
 })();
 
 /******/ 	return __webpack_exports__;

@@ -415,8 +415,8 @@ export type RenderParameters = {
      */
     renderInteractiveForms?: boolean | undefined;
     /**
-     * - (optional) annotations not
-     * rendered during page rendering.
+     * - (optional) annotations
+     * ignored during page rendering.
      */
     annotationsNotRendered?: any[] | undefined;
     /**
@@ -1055,8 +1055,8 @@ export class PDFDocumentProxy {
  * @property {boolean} [renderInteractiveForms] - Whether or not interactive
  *   form elements are rendered in the display layer. If so, we do not render
  *   them on the canvas as well. The default value is `false`.
- * @property {Array<any>} [annotationsNotRendered] - (optional) annotations not
- *   rendered during page rendering.
+ * @property {Array<any>} [annotationsNotRendered] - (optional) annotations
+ *   ignored during page rendering.
  * @property {Array<any>} [transform] - Additional transform, applied just
  *   before viewport transform.
  * @property {Object} [imageLayer] - An object that has `beginLayout`,

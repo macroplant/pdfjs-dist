@@ -6228,7 +6228,7 @@ class BaseViewer {
       throw new Error("Cannot initialize BaseViewer.");
     }
 
-    const viewerVersion = '2.11.17';
+    const viewerVersion = '2.11.18';
 
     if (_pdfjsLib.version !== viewerVersion) {
       throw new Error(`The API version "${_pdfjsLib.version}" does not match the Viewer version "${viewerVersion}".`);
@@ -8056,8 +8056,8 @@ var _pdf_single_page_viewer = __w_pdfjs_require__(18);
 
 var _pdf_viewer = __w_pdfjs_require__(22);
 
-const pdfjsVersion = '2.11.17';
-const pdfjsBuild = '32c3c6395';
+const pdfjsVersion = '2.11.18';
+const pdfjsBuild = '54005a5d6';
 })();
 
 /******/ 	return __webpack_exports__;
