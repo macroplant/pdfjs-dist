@@ -3488,8 +3488,8 @@ var _xref = __w_pdfjs_require__(98);
 const DEFAULT_USER_UNIT = 1.0;
 const LETTER_SIZE_MEDIABOX = [0, 0, 612, 792];
 
-function isAnnotationRenderable(annotation, annotationStorage, annotationIntent) {
-  return annotationIntent === "display" && annotation.mustBeViewed(annotationStorage) || annotationIntent === "print" && annotation.mustBePrinted(annotationStorage);
+function isAnnotationRenderable(annotation, annotationStorage, annotationIntent, annotationsNotRendered) {
+  return !annotationsNotRendered.includes(annotation.data.id) && (annotationIntent === "display" && annotation.mustBeViewed(annotationStorage) || annotationIntent === "print" && annotation.mustBePrinted(annotationStorage));
 }
 
 class Page {
@@ -3765,7 +3765,7 @@ class Page {
       const opListPromises = [];
 
       for (const annotation of annotations) {
-        if (isAnnotationRenderable(annotation, annotationStorage, annotationIntent) && !annotationsNotRendered.includes(annotation.id)) {
+        if (isAnnotationRenderable(annotation, annotationStorage, annotationIntent, annotationsNotRendered)) {
           opListPromises.push(annotation.getOperatorList(partialEvaluator, task, renderInteractiveForms, annotationStorage).catch(function (reason) {
             (0, _util.warn)("getOperatorList - ignoring annotation data during " + `"${task.name}" task: "${reason}".`);
             return null;
