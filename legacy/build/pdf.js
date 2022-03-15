@@ -10049,7 +10049,7 @@ function _fetchDocument(worker, source, pdfDataRangeTransport, docId) {
 
   return worker.messageHandler.sendWithPromise("GetDocRequest", {
     docId: docId,
-    apiVersion: '2.11.18',
+    apiVersion: '2.11.41',
     source: {
       data: source.data,
       url: source.url,
@@ -10326,6 +10326,11 @@ var PDFDocumentProxy = /*#__PURE__*/function () {
     key: "getPageLabels",
     value: function getPageLabels() {
       return this._transport.getPageLabels();
+    }
+  }, {
+    key: "getPageLabelDetails",
+    value: function getPageLabelDetails() {
+      return this._transport.getPageLabelDetails();
     }
   }, {
     key: "getPageLayout",
@@ -12194,6 +12199,11 @@ var WorkerTransport = /*#__PURE__*/function () {
       return this.messageHandler.sendWithPromise("GetPageLabels", null);
     }
   }, {
+    key: "getPageLabelDetails",
+    value: function getPageLabelDetails() {
+      return this.messageHandler.sendWithPromise('GetPageLabelDetails', null);
+    }
+  }, {
     key: "getPageLayout",
     value: function getPageLayout() {
       return this.messageHandler.sendWithPromise("GetPageLayout", null);
@@ -12681,9 +12691,9 @@ var InternalRenderTask = function InternalRenderTaskClosure() {
   return InternalRenderTask;
 }();
 
-var version = '2.11.18';
+var version = '2.11.41';
 exports.version = version;
-var build = '54005a5d6';
+var build = '43633b5c3';
 exports.build = build;
 
 /***/ }),
@@ -25969,8 +25979,8 @@ var _svg = __w_pdfjs_require__(129);
 
 var _xfa_layer = __w_pdfjs_require__(130);
 
-var pdfjsVersion = '2.11.18';
-var pdfjsBuild = '54005a5d6';
+var pdfjsVersion = '2.11.41';
+var pdfjsBuild = '43633b5c3';
 {
   if (_is_node.isNodeJS) {
     var _require = __w_pdfjs_require__(131),
