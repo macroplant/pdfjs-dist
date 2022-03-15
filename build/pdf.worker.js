@@ -125,7 +125,7 @@ class WorkerMessageHandler {
     const WorkerTasks = [];
     const verbosity = (0, _util.getVerbosityLevel)();
     const apiVersion = docParams.apiVersion;
-    const workerVersion = '2.11.42';
+    const workerVersion = '2.11.43';
 
     if (apiVersion !== workerVersion) {
       throw new Error(`The API version "${apiVersion}" does not match ` + `the Worker version "${workerVersion}".`);
@@ -52911,7 +52911,7 @@ class Catalog {
   }
 
   _readPageLabelDetails() {
-    const obj = this.catDict.getRaw('PageLabels');
+    const obj = this._catDict.getRaw("PageLabels");
 
     if (!obj) {
       return null;
@@ -52919,7 +52919,7 @@ class Catalog {
 
     const pageLabels = new Array(this.numPages);
     let style = null,
-        prefix = '';
+        prefix = "";
     const numberTree = new _name_number_tree.NumberTree(obj, this.xref);
     const nums = numberTree.getAll();
     let currentIndex = 1;
@@ -52929,48 +52929,48 @@ class Catalog {
         const labelDict = nums[i];
 
         if (!(0, _primitives.isDict)(labelDict)) {
-          throw new _util.FormatError('PageLabel is not a dictionary.');
+          throw new _util.FormatError("PageLabel is not a dictionary.");
         }
 
-        if (labelDict.has('Type') && !(0, _primitives.isName)(labelDict.get('Type'), 'PageLabel')) {
-          throw new _util.FormatError('Invalid type in PageLabel dictionary.');
+        if (labelDict.has("Type") && !(0, _primitives.isName)(labelDict.get("Type"), "PageLabel")) {
+          throw new _util.FormatError("Invalid type in PageLabel dictionary.");
         }
 
-        if (labelDict.has('S')) {
-          const s = labelDict.get('S');
+        if (labelDict.has("S")) {
+          const s = labelDict.get("S");
 
           if (!(0, _primitives.isName)(s)) {
-            throw new _util.FormatError('Invalid style in PageLabel dictionary.');
+            throw new _util.FormatError("Invalid style in PageLabel dictionary.");
           }
 
           style = {
-            'D': 'decimal_arabic',
-            'R': 'uppercase_roman',
-            'r': 'lowercase_roman',
-            'A': 'uppercase_latin',
-            'a': 'lowercase_latin'
+            D: "decimal_arabic",
+            R: "uppercase_roman",
+            r: "lowercase_roman",
+            A: "uppercase_latin",
+            a: "lowercase_latin"
           }[s.name];
         } else {
-          style = 'no_style';
+          style = "no_style";
         }
 
-        if (labelDict.has('P')) {
-          const p = labelDict.get('P');
+        if (labelDict.has("P")) {
+          const p = labelDict.get("P");
 
           if (!(0, _util.isString)(p)) {
-            throw new _util.FormatError('Invalid prefix in PageLabel dictionary.');
+            throw new _util.FormatError("Invalid prefix in PageLabel dictionary.");
           }
 
           prefix = (0, _util.stringToPDFString)(p);
         } else {
-          prefix = '';
+          prefix = "";
         }
 
-        if (labelDict.has('St')) {
-          const st = labelDict.get('St');
+        if (labelDict.has("St")) {
+          const st = labelDict.get("St");
 
           if (!(Number.isInteger(st) && st >= 1)) {
-            throw new _util.FormatError('Invalid start in PageLabel dictionary.');
+            throw new _util.FormatError("Invalid start in PageLabel dictionary.");
           }
 
           currentIndex = st;
@@ -52981,8 +52981,8 @@ class Catalog {
 
       pageLabels[i] = {
         firstPageNum: currentIndex,
-        prefix: prefix,
-        style: style
+        prefix,
+        style
       };
       currentIndex++;
     }
@@ -72090,8 +72090,8 @@ Object.defineProperty(exports, "WorkerMessageHandler", ({
 
 var _worker = __w_pdfjs_require__(1);
 
-const pdfjsVersion = '2.11.42';
-const pdfjsBuild = '5a2cfb925';
+const pdfjsVersion = '2.11.43';
+const pdfjsBuild = '7f802565a';
 })();
 
 /******/ 	return __webpack_exports__;
