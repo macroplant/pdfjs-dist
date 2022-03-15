@@ -125,7 +125,7 @@ class WorkerMessageHandler {
     const WorkerTasks = [];
     const verbosity = (0, _util.getVerbosityLevel)();
     const apiVersion = docParams.apiVersion;
-    const workerVersion = '2.11.41';
+    const workerVersion = '2.11.42';
 
     if (apiVersion !== workerVersion) {
       throw new Error(`The API version "${apiVersion}" does not match ` + `the Worker version "${workerVersion}".`);
@@ -52797,18 +52797,8 @@ class Catalog {
 
   get pageLabelDetails() {
     let obj = null;
-
-    try {
-      obj = this._readPageLabelDetails();
-    } catch (ex) {
-      if (ex instanceof _core_utils.MissingDataException) {
-        throw ex;
-      }
-
-      (0, _util.warn)('Unable to read page label details.');
-    }
-
-    return (0, _util.shadow)(this, 'pageLabelDetails', obj);
+    obj = this._readPageLabelDetails();
+    return (0, _util.shadow)(this, "pageLabelDetails", obj);
   }
 
   _readPageLabels() {
@@ -72100,8 +72090,8 @@ Object.defineProperty(exports, "WorkerMessageHandler", ({
 
 var _worker = __w_pdfjs_require__(1);
 
-const pdfjsVersion = '2.11.41';
-const pdfjsBuild = '43633b5c3';
+const pdfjsVersion = '2.11.42';
+const pdfjsBuild = '5a2cfb925';
 })();
 
 /******/ 	return __webpack_exports__;

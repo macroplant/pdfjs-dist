@@ -173,7 +173,7 @@ var WorkerMessageHandler = /*#__PURE__*/function () {
       var WorkerTasks = [];
       var verbosity = (0, _util.getVerbosityLevel)();
       var apiVersion = docParams.apiVersion;
-      var workerVersion = '2.11.41';
+      var workerVersion = '2.11.42';
 
       if (apiVersion !== workerVersion) {
         throw new Error("The API version \"".concat(apiVersion, "\" does not match ") + "the Worker version \"".concat(workerVersion, "\"."));
@@ -66301,18 +66301,8 @@ var Catalog = /*#__PURE__*/function () {
     key: "pageLabelDetails",
     get: function get() {
       var obj = null;
-
-      try {
-        obj = this._readPageLabelDetails();
-      } catch (ex) {
-        if (ex instanceof _core_utils.MissingDataException) {
-          throw ex;
-        }
-
-        (0, _util.warn)('Unable to read page label details.');
-      }
-
-      return (0, _util.shadow)(this, 'pageLabelDetails', obj);
+      obj = this._readPageLabelDetails();
+      return (0, _util.shadow)(this, "pageLabelDetails", obj);
     }
   }, {
     key: "_readPageLabels",
@@ -92632,8 +92622,8 @@ Object.defineProperty(exports, "WorkerMessageHandler", ({
 
 var _worker = __w_pdfjs_require__(1);
 
-var pdfjsVersion = '2.11.41';
-var pdfjsBuild = '43633b5c3';
+var pdfjsVersion = '2.11.42';
+var pdfjsBuild = '5a2cfb925';
 })();
 
 /******/ 	return __webpack_exports__;
