@@ -8388,7 +8388,7 @@ var BaseViewer = /*#__PURE__*/function () {
       throw new Error("Cannot initialize BaseViewer.");
     }
 
-    var viewerVersion = '2.11.43';
+    var viewerVersion = '2.11.45';
 
     if (_pdfjsLib.version !== viewerVersion) {
       throw new Error("The API version \"".concat(_pdfjsLib.version, "\" does not match the Viewer version \"").concat(viewerVersion, "\"."));
@@ -10498,8 +10498,8 @@ var _pdf_single_page_viewer = __w_pdfjs_require__(20);
 
 var _pdf_viewer = __w_pdfjs_require__(24);
 
-var pdfjsVersion = '2.11.43';
-var pdfjsBuild = '7f802565a';
+var pdfjsVersion = '2.11.45';
+var pdfjsBuild = '7bbbeca2c';
 })();
 
 /******/ 	return __webpack_exports__;

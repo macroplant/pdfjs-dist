@@ -173,7 +173,7 @@ var WorkerMessageHandler = /*#__PURE__*/function () {
       var WorkerTasks = [];
       var verbosity = (0, _util.getVerbosityLevel)();
       var apiVersion = docParams.apiVersion;
-      var workerVersion = '2.11.43';
+      var workerVersion = '2.11.45';
 
       if (apiVersion !== workerVersion) {
         throw new Error("The API version \"".concat(apiVersion, "\" does not match ") + "the Worker version \"".concat(workerVersion, "\"."));
@@ -537,11 +537,11 @@ var WorkerMessageHandler = /*#__PURE__*/function () {
       handler.on("GetPageLabels", function wphSetupGetPageLabels(data) {
         return pdfManager.ensureCatalog("pageLabels");
       });
-      handler.on('GetPageLabelDetails', function wphSetupGetPageLabelDetails(data) {
-        return pdfManager.ensureCatalog('pageLabelDetails');
+      handler.on("GetPageLabelDetails", function wphSetupGetPageLabelDetails(data) {
+        return pdfManager.ensureCatalog("pageLabelDetails");
       });
-      handler.on('GetPageLayout', function wphSetupGetPageLayout(data) {
-        return pdfManager.ensureCatalog('pageLayout');
+      handler.on("GetPageLayout", function wphSetupGetPageLayout(data) {
+        return pdfManager.ensureCatalog("pageLayout");
       });
       handler.on("GetPageMode", function wphSetupGetPageMode(data) {
         return pdfManager.ensureCatalog("pageMode");
@@ -66301,7 +66301,17 @@ var Catalog = /*#__PURE__*/function () {
     key: "pageLabelDetails",
     get: function get() {
       var obj = null;
-      obj = this._readPageLabelDetails();
+
+      try {
+        obj = this._readPageLabelDetails();
+      } catch (ex) {
+        if (ex instanceof _core_utils.MissingDataException) {
+          throw ex;
+        }
+
+        (0, _util.warn)("Unable to read page label details.");
+      }
+
       return (0, _util.shadow)(this, "pageLabelDetails", obj);
     }
   }, {
@@ -92622,8 +92632,8 @@ Object.defineProperty(exports, "WorkerMessageHandler", ({
 
 var _worker = __w_pdfjs_require__(1);
 
-var pdfjsVersion = '2.11.43';
-var pdfjsBuild = '7f802565a';
+var pdfjsVersion = '2.11.45';
+var pdfjsBuild = '7bbbeca2c';
 })();
 
 /******/ 	return __webpack_exports__;

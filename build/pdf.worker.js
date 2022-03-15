@@ -125,7 +125,7 @@ class WorkerMessageHandler {
     const WorkerTasks = [];
     const verbosity = (0, _util.getVerbosityLevel)();
     const apiVersion = docParams.apiVersion;
-    const workerVersion = '2.11.43';
+    const workerVersion = '2.11.45';
 
     if (apiVersion !== workerVersion) {
       throw new Error(`The API version "${apiVersion}" does not match ` + `the Worker version "${workerVersion}".`);
@@ -419,11 +419,11 @@ class WorkerMessageHandler {
     handler.on("GetPageLabels", function wphSetupGetPageLabels(data) {
       return pdfManager.ensureCatalog("pageLabels");
     });
-    handler.on('GetPageLabelDetails', function wphSetupGetPageLabelDetails(data) {
-      return pdfManager.ensureCatalog('pageLabelDetails');
+    handler.on("GetPageLabelDetails", function wphSetupGetPageLabelDetails(data) {
+      return pdfManager.ensureCatalog("pageLabelDetails");
     });
-    handler.on('GetPageLayout', function wphSetupGetPageLayout(data) {
-      return pdfManager.ensureCatalog('pageLayout');
+    handler.on("GetPageLayout", function wphSetupGetPageLayout(data) {
+      return pdfManager.ensureCatalog("pageLayout");
     });
     handler.on("GetPageMode", function wphSetupGetPageMode(data) {
       return pdfManager.ensureCatalog("pageMode");
@@ -52797,7 +52797,17 @@ class Catalog {
 
   get pageLabelDetails() {
     let obj = null;
-    obj = this._readPageLabelDetails();
+
+    try {
+      obj = this._readPageLabelDetails();
+    } catch (ex) {
+      if (ex instanceof _core_utils.MissingDataException) {
+        throw ex;
+      }
+
+      (0, _util.warn)("Unable to read page label details.");
+    }
+
     return (0, _util.shadow)(this, "pageLabelDetails", obj);
   }
 
@@ -52902,7 +52912,7 @@ class Catalog {
 
       pageLabels[i] = {
         value: prefix + currentLabel,
-        labelDict: labelDict
+        labelDict
       };
       currentIndex++;
     }
@@ -72090,8 +72100,8 @@ Object.defineProperty(exports, "WorkerMessageHandler", ({
 
 var _worker = __w_pdfjs_require__(1);
 
-const pdfjsVersion = '2.11.43';
-const pdfjsBuild = '7f802565a';
+const pdfjsVersion = '2.11.45';
+const pdfjsBuild = '7bbbeca2c';
 })();
 
 /******/ 	return __webpack_exports__;
