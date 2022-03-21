@@ -1,6 +1,6 @@
 {
   "name": "pdfjs-dist",
-  "version": "2.11.18",
+  "version": "2.10.377",
   "main": "build/pdf.js",
   "types": "types/src/pdf.d.ts",
   "description": "Generic build of Mozilla's PDF.js library.",
@@ -26,6 +26,6 @@
   "format": "amd",
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com/macroplant/pdfjs-dist.git"
+    "url": "https://github.com/mozilla/pdfjs-dist"
   }
 }

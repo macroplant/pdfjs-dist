@@ -12,6 +12,3 @@ features such as e.g. `async`/`await`, `ReadableStream`, optional chaining, and
 nullish coalescing; please see the `legacy` folder.
 
 See https://github.com/mozilla/pdf.js for learning and contributing.
-# Build
-
-source https://github.com/macroplant/pdf.js/tree/hide-annotations-pdfjs-dist

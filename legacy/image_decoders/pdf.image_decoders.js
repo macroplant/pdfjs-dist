@@ -435,8 +435,7 @@ var UNSUPPORTED_FEATURES = {
   errorFontLoadNative: "errorFontLoadNative",
   errorFontBuildPath: "errorFontBuildPath",
   errorFontGetPath: "errorFontGetPath",
-  errorMarkedContent: "errorMarkedContent",
-  errorContentSubStream: "errorContentSubStream"
+  errorMarkedContent: "errorMarkedContent"
 };
 exports.UNSUPPORTED_FEATURES = UNSUPPORTED_FEATURES;
 var PasswordResponses = {
@@ -12125,8 +12124,8 @@ var _jpg = __w_pdfjs_require__(90);
 
 var _jpx = __w_pdfjs_require__(91);
 
-var pdfjsVersion = '2.11.18';
-var pdfjsBuild = '54005a5d6';
+var pdfjsVersion = '2.10.377';
+var pdfjsBuild = '156762c48';
 })();
 
 /******/ 	return __webpack_exports__;

@@ -173,7 +173,7 @@ var WorkerMessageHandler = /*#__PURE__*/function () {
       var WorkerTasks = [];
       var verbosity = (0, _util.getVerbosityLevel)();
       var apiVersion = docParams.apiVersion;
-      var workerVersion = '2.11.18';
+      var workerVersion = '2.10.377';
 
       if (apiVersion !== workerVersion) {
         throw new Error("The API version \"".concat(apiVersion, "\" does not match ") + "the Worker version \"".concat(workerVersion, "\"."));
@@ -732,7 +732,6 @@ var WorkerMessageHandler = /*#__PURE__*/function () {
             task: task,
             intent: data.intent,
             renderInteractiveForms: data.renderInteractiveForms,
-            annotationsNotRendered: data.annotationsNotRendered,
             annotationStorage: data.annotationStorage
           }).then(function (operatorListInfo) {
             finishWorkerTask(task);
@@ -1877,8 +1876,7 @@ var UNSUPPORTED_FEATURES = {
   errorFontLoadNative: "errorFontLoadNative",
   errorFontBuildPath: "errorFontBuildPath",
   errorFontGetPath: "errorFontGetPath",
-  errorMarkedContent: "errorMarkedContent",
-  errorContentSubStream: "errorContentSubStream"
+  errorMarkedContent: "errorMarkedContent"
 };
 exports.UNSUPPORTED_FEATURES = UNSUPPORTED_FEATURES;
 var PasswordResponses = {
@@ -12155,10 +12153,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 var DEFAULT_USER_UNIT = 1.0;
 var LETTER_SIZE_MEDIABOX = [0, 0, 612, 792];
 
-function isAnnotationRenderable(annotation, annotationStorage, annotationIntent, annotationsNotRendered) {
-  return !annotationsNotRendered.includes(annotation.data.id) && (annotationIntent === "display" && annotation.mustBeViewed(annotationStorage) || annotationIntent === "print" && annotation.mustBePrinted(annotationStorage));
-}
-
 var Page = /*#__PURE__*/function () {
   function Page(_ref) {
     var pdfManager = _ref.pdfManager,
@@ -12331,30 +12325,15 @@ var Page = /*#__PURE__*/function () {
       return (0, _util.shadow)(this, "rotate", rotate);
     }
   }, {
-    key: "_onSubStreamError",
-    value: function _onSubStreamError(handler, reason, objId) {
-      if (this.evaluatorOptions.ignoreErrors) {
-        handler.send("UnsupportedFeature", {
-          featureId: _util.UNSUPPORTED_FEATURES.errorContentSubStream
-        });
-        (0, _util.warn)("getContentStream - ignoring sub-stream (".concat(objId, "): \"").concat(reason, "\"."));
-        return;
-      }
-
-      throw reason;
-    }
-  }, {
     key: "getContentStream",
-    value: function getContentStream(handler) {
-      var _this = this;
-
+    value: function getContentStream() {
       return this.pdfManager.ensure(this, "content").then(function (content) {
         if (content instanceof _base_stream.BaseStream) {
           return content;
         }
 
         if (Array.isArray(content)) {
-          return new _decode_stream.StreamsSequenceStream(content, _this._onSubStreamError.bind(_this, handler));
+          return new _decode_stream.StreamsSequenceStream(content);
         }
 
         return new _stream.NullStream();
@@ -12416,30 +12395,29 @@ var Page = /*#__PURE__*/function () {
   }, {
     key: "loadResources",
     value: function loadResources(keys) {
-      var _this2 = this;
+      var _this = this;
 
       if (!this.resourcesPromise) {
         this.resourcesPromise = this.pdfManager.ensure(this, "resources");
       }
 
       return this.resourcesPromise.then(function () {
-        var objectLoader = new _object_loader.ObjectLoader(_this2.resources, keys, _this2.xref);
+        var objectLoader = new _object_loader.ObjectLoader(_this.resources, keys, _this.xref);
         return objectLoader.load();
       });
     }
   }, {
     key: "getOperatorList",
     value: function getOperatorList(_ref2) {
-      var _this3 = this;
+      var _this2 = this;
 
       var handler = _ref2.handler,
           sink = _ref2.sink,
           task = _ref2.task,
           intent = _ref2.intent,
           renderInteractiveForms = _ref2.renderInteractiveForms,
-          annotationStorage = _ref2.annotationStorage,
-          annotationsNotRendered = _ref2.annotationsNotRendered;
-      var contentStreamPromise = this.getContentStream(handler);
+          annotationStorage = _ref2.annotationStorage;
+      var contentStreamPromise = this.getContentStream();
       var resourcesPromise = this.loadResources(["ColorSpace", "ExtGState", "Font", "Pattern", "Properties", "Shading", "XObject"]);
       var partialEvaluator = new _evaluator.PartialEvaluator({
         xref: this.xref,
@@ -12459,14 +12437,14 @@ var Page = /*#__PURE__*/function () {
 
         var opList = new _operator_list.OperatorList(intent, sink);
         handler.send("StartRenderPage", {
-          transparency: partialEvaluator.hasBlendModes(_this3.resources, _this3.nonBlendModesSet),
-          pageIndex: _this3.pageIndex,
+          transparency: partialEvaluator.hasBlendModes(_this2.resources, _this2.nonBlendModesSet),
+          pageIndex: _this2.pageIndex,
           intent: intent
         });
         return partialEvaluator.getOperatorList({
           stream: contentStream,
           task: task,
-          resources: _this3.resources,
+          resources: _this2.resources,
           operatorList: opList
         }).then(function () {
           return opList;
@@ -12494,7 +12472,7 @@ var Page = /*#__PURE__*/function () {
           for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
             var annotation = _step2.value;
 
-            if (isAnnotationRenderable(annotation, annotationStorage, annotationIntent, annotationsNotRendered)) {
+            if (annotationIntent === "display" && annotation.mustBeViewed(annotationStorage) || annotationIntent === "print" && annotation.mustBePrinted(annotationStorage)) {
               opListPromises.push(annotation.getOperatorList(partialEvaluator, task, renderInteractiveForms, annotationStorage)["catch"](function (reason) {
                 (0, _util.warn)("getOperatorList - ignoring annotation data during " + "\"".concat(task.name, "\" task: \"").concat(reason, "\"."));
                 return null;
@@ -12535,7 +12513,7 @@ var Page = /*#__PURE__*/function () {
   }, {
     key: "extractTextContent",
     value: function extractTextContent(_ref7) {
-      var _this4 = this;
+      var _this3 = this;
 
       var handler = _ref7.handler,
           task = _ref7.task,
@@ -12543,7 +12521,7 @@ var Page = /*#__PURE__*/function () {
           includeMarkedContent = _ref7.includeMarkedContent,
           sink = _ref7.sink,
           combineTextItems = _ref7.combineTextItems;
-      var contentStreamPromise = this.getContentStream(handler);
+      var contentStreamPromise = this.getContentStream();
       var resourcesPromise = this.loadResources(["ExtGState", "Font", "Properties", "XObject"]);
       var dataPromises = Promise.all([contentStreamPromise, resourcesPromise]);
       return dataPromises.then(function (_ref8) {
@@ -12551,20 +12529,20 @@ var Page = /*#__PURE__*/function () {
             contentStream = _ref9[0];
 
         var partialEvaluator = new _evaluator.PartialEvaluator({
-          xref: _this4.xref,
+          xref: _this3.xref,
           handler: handler,
-          pageIndex: _this4.pageIndex,
-          idFactory: _this4._localIdFactory,
-          fontCache: _this4.fontCache,
-          builtInCMapCache: _this4.builtInCMapCache,
-          standardFontDataCache: _this4.standardFontDataCache,
-          globalImageCache: _this4.globalImageCache,
-          options: _this4.evaluatorOptions
+          pageIndex: _this3.pageIndex,
+          idFactory: _this3._localIdFactory,
+          fontCache: _this3.fontCache,
+          builtInCMapCache: _this3.builtInCMapCache,
+          standardFontDataCache: _this3.standardFontDataCache,
+          globalImageCache: _this3.globalImageCache,
+          options: _this3.evaluatorOptions
         });
         return partialEvaluator.getTextContent({
           stream: contentStream,
           task: task,
-          resources: _this4.resources,
+          resources: _this3.resources,
           normalizeWhitespace: normalizeWhitespace,
           includeMarkedContent: includeMarkedContent,
           combineTextItems: combineTextItems,
@@ -12648,18 +12626,18 @@ var Page = /*#__PURE__*/function () {
   }, {
     key: "_parsedAnnotations",
     get: function get() {
-      var _this5 = this;
+      var _this4 = this;
 
       var parsedAnnotations = this.pdfManager.ensure(this, "annotations").then(function () {
         var annotationPromises = [];
 
-        var _iterator4 = _createForOfIteratorHelper(_this5.annotations),
+        var _iterator4 = _createForOfIteratorHelper(_this4.annotations),
             _step4;
 
         try {
           for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
             var annotationRef = _step4.value;
-            annotationPromises.push(_annotation.AnnotationFactory.create(_this5.xref, annotationRef, _this5.pdfManager, _this5._localIdFactory, false)["catch"](function (reason) {
+            annotationPromises.push(_annotation.AnnotationFactory.create(_this4.xref, annotationRef, _this4.pdfManager, _this4._localIdFactory, false)["catch"](function (reason) {
               (0, _util.warn)("_parsedAnnotations: \"".concat(reason, "\"."));
               return null;
             }));
@@ -12933,7 +12911,7 @@ var PDFDocument = /*#__PURE__*/function () {
   }, {
     key: "_hasOnlyDocumentSignatures",
     value: function _hasOnlyDocumentSignatures(fields) {
-      var _this6 = this;
+      var _this5 = this;
 
       var recursionDepth = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
       var RECURSION_LIMIT = 10;
@@ -12943,7 +12921,7 @@ var PDFDocument = /*#__PURE__*/function () {
       }
 
       return fields.every(function (field) {
-        field = _this6.xref.fetchIfRef(field);
+        field = _this5.xref.fetchIfRef(field);
 
         if (!(field instanceof _primitives.Dict)) {
           return false;
@@ -12955,7 +12933,7 @@ var PDFDocument = /*#__PURE__*/function () {
             return false;
           }
 
-          return _this6._hasOnlyDocumentSignatures(field.get("Kids"), recursionDepth);
+          return _this5._hasOnlyDocumentSignatures(field.get("Kids"), recursionDepth);
         }
 
         var isSignature = (0, _primitives.isName)(field.get("FT"), "Sig");
@@ -13658,7 +13636,7 @@ var PDFDocument = /*#__PURE__*/function () {
   }, {
     key: "getPage",
     value: function getPage(pageIndex) {
-      var _this7 = this;
+      var _this6 = this;
 
       if (this._pagePromises[pageIndex] !== undefined) {
         return this._pagePromises[pageIndex];
@@ -13691,12 +13669,12 @@ var PDFDocument = /*#__PURE__*/function () {
             ref = _ref11[1];
 
         return new Page({
-          pdfManager: _this7.pdfManager,
-          xref: _this7.xref,
+          pdfManager: _this6.pdfManager,
+          xref: _this6.xref,
           pageIndex: pageIndex,
           pageDict: pageDict,
           ref: ref,
-          globalIdFactory: _this7._globalIdFactory,
+          globalIdFactory: _this6._globalIdFactory,
           fontCache: catalog.fontCache,
           builtInCMapCache: catalog.builtInCMapCache,
           standardFontDataCache: catalog.standardFontDataCache,
@@ -13709,7 +13687,7 @@ var PDFDocument = /*#__PURE__*/function () {
   }, {
     key: "checkFirstPage",
     value: function checkFirstPage() {
-      var _this8 = this;
+      var _this7 = this;
 
       return this.getPage(0)["catch"]( /*#__PURE__*/function () {
         var _ref12 = _asyncToGenerator( /*#__PURE__*/_regenerator["default"].mark(function _callee5(reason) {
@@ -13722,9 +13700,9 @@ var PDFDocument = /*#__PURE__*/function () {
                     break;
                   }
 
-                  _this8._pagePromises.length = 0;
+                  _this7._pagePromises.length = 0;
                   _context5.next = 4;
-                  return _this8.cleanup();
+                  return _this7.cleanup();
 
                 case 4:
                   throw new _core_utils.XRefParseException();
@@ -26645,8 +26623,6 @@ var StreamsSequenceStream = /*#__PURE__*/function (_DecodeStream) {
   function StreamsSequenceStream(streams) {
     var _this2;
 
-    var onError = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-
     _classCallCheck(this, StreamsSequenceStream);
 
     var maybeLength = 0;
@@ -26667,7 +26643,6 @@ var StreamsSequenceStream = /*#__PURE__*/function (_DecodeStream) {
 
     _this2 = _super2.call(this, maybeLength);
     _this2.streams = streams;
-    _this2._onError = onError;
     return _this2;
   }
 
@@ -26682,20 +26657,7 @@ var StreamsSequenceStream = /*#__PURE__*/function (_DecodeStream) {
       }
 
       var stream = streams.shift();
-      var chunk;
-
-      try {
-        chunk = stream.getBytes();
-      } catch (reason) {
-        if (this._onError) {
-          this._onError(reason, stream.dict && stream.dict.objId);
-
-          return;
-        }
-
-        throw reason;
-      }
-
+      var chunk = stream.getBytes();
       var bufferLength = this.bufferLength;
       var newLength = bufferLength + chunk.length;
       var buffer = this.ensureBuffer(newLength);
@@ -71953,10 +71915,6 @@ var XFAObject = /*#__PURE__*/function () {
       child[_parent] = this;
 
       this[_children].push(child);
-
-      if (!child[$globalData] && this[$globalData]) {
-        child[$globalData] = this[$globalData];
-      }
     }
   }, {
     key: $removeChild,
@@ -72000,10 +71958,6 @@ var XFAObject = /*#__PURE__*/function () {
       child[_parent] = this;
 
       this[_children].splice(i, 0, child);
-
-      if (!child[$globalData] && this[$globalData]) {
-        child[$globalData] = this[$globalData];
-      }
     }
   }, {
     key: $isTransparent,
@@ -74819,10 +74773,6 @@ var Binder = /*#__PURE__*/function () {
 
       if (matches.length > 1) {
         baseClone = formNode[_xfa_object.$clone]();
-
-        baseClone[_xfa_object.$removeChild](baseClone.occur);
-
-        baseClone.occur = null;
       }
 
       this._bindValue(formNode, matches[0], picture);
@@ -74846,6 +74796,9 @@ var Binder = /*#__PURE__*/function () {
 
         var clone = baseClone[_xfa_object.$clone]();
 
+        clone.occur.min = 1;
+        clone.occur.max = 1;
+        clone.occur.initial = 1;
         parent[name].push(clone);
 
         parent[_xfa_object.$insertAt](pos + i, clone);
@@ -74874,49 +74827,24 @@ var Binder = /*#__PURE__*/function () {
 
       var name = formNode[_xfa_object.$nodeName];
 
-      if (!(parent[name] instanceof _xfa_object.XFAObjectArray)) {
-        return;
-      }
+      for (var i = 0, ii = occur.initial; i < ii; i++) {
+        var clone = formNode[_xfa_object.$clone]();
 
-      var currentNumber;
+        clone.occur.min = 1;
+        clone.occur.max = 1;
+        clone.occur.initial = 1;
+        parent[name].push(clone);
 
-      if (formNode.name) {
-        currentNumber = parent[name].children.filter(function (e) {
-          return e.name === formNode.name;
-        }).length;
-      } else {
-        currentNumber = parent[name].children.length;
-      }
-
-      var pos = parent[_xfa_object.$indexOf](formNode) + 1;
-      var ii = occur.initial - currentNumber;
-
-      if (ii) {
-        var nodeClone = formNode[_xfa_object.$clone]();
-
-        nodeClone[_xfa_object.$removeChild](nodeClone.occur);
-
-        nodeClone.occur = null;
-        parent[name].push(nodeClone);
-
-        parent[_xfa_object.$insertAt](pos, nodeClone);
-
-        for (var i = 1; i < ii; i++) {
-          var clone = nodeClone[_xfa_object.$clone]();
-
-          parent[name].push(clone);
-
-          parent[_xfa_object.$insertAt](pos + i, clone);
-        }
+        parent[_xfa_object.$appendChild](clone);
       }
     }
   }, {
     key: "_getOccurInfo",
     value: function _getOccurInfo(formNode) {
-      var name = formNode.name,
-          occur = formNode.occur;
+      var occur = formNode.occur;
+      var dataName = formNode.name;
 
-      if (!occur || !name) {
+      if (!occur || !dataName) {
         return [1, 1];
       }
 
@@ -75093,6 +75021,11 @@ var Binder = /*#__PURE__*/function () {
           }
 
           if (match) {
+            if (match.length < min) {
+              (0, _util.warn)("XFA - Must have at least ".concat(min, " occurrences: ").concat(formNode[_xfa_object.$nodeName], "."));
+              continue;
+            }
+
             this._bindOccurrences(child, match, picture);
           } else if (min > 0) {
             this._setProperties(child, dataNode);
@@ -78253,8 +78186,6 @@ var Field = /*#__PURE__*/function (_XFAObject39) {
 
           if (this.value.exData) {
             _value6 = this.value.exData[_xfa_object.$text]();
-          } else if (this.value.text) {
-            _value6 = this.value.text[_xfa_object.$getExtra]();
           } else {
             var htmlValue = this.value[_xfa_object.$toHTML]().html;
 
@@ -79400,61 +79331,32 @@ var Occur = /*#__PURE__*/function (_XFAObject58) {
 
     _this73 = _super73.call(this, TEMPLATE_NS_ID, "occur", true);
     _this73.id = attributes.id || "";
-    _this73.initial = attributes.initial !== "" ? (0, _utils.getInteger)({
+    _this73.initial = (0, _utils.getInteger)({
       data: attributes.initial,
-      defaultValue: "",
+      defaultValue: 1,
       validate: function validate(x) {
         return true;
       }
-    }) : "";
-    _this73.max = attributes.max !== "" ? (0, _utils.getInteger)({
+    });
+    _this73.max = (0, _utils.getInteger)({
       data: attributes.max,
       defaultValue: 1,
       validate: function validate(x) {
         return true;
       }
-    }) : "";
-    _this73.min = attributes.min !== "" ? (0, _utils.getInteger)({
+    });
+    _this73.min = (0, _utils.getInteger)({
       data: attributes.min,
       defaultValue: 1,
       validate: function validate(x) {
         return true;
       }
-    }) : "";
+    });
     _this73.use = attributes.use || "";
     _this73.usehref = attributes.usehref || "";
     _this73.extras = null;
     return _this73;
   }
-
-  _createClass(Occur, [{
-    key: _xfa_object.$clean,
-    value: function value() {
-      var parent = this[_xfa_object.$getParent]();
-
-      var originalMin = this.min;
-
-      if (this.min === "") {
-        this.min = parent instanceof PageArea || parent instanceof PageSet ? 0 : 1;
-      }
-
-      if (this.max === "") {
-        if (originalMin === "") {
-          this.max = parent instanceof PageArea || parent instanceof PageSet ? -1 : 1;
-        } else {
-          this.max = this.min;
-        }
-      }
-
-      if (this.max !== -1 && this.max < this.min) {
-        this.max = this.min;
-      }
-
-      if (this.initial === "") {
-        this.initial = parent instanceof Template ? 1 : this.min;
-      }
-    }
-  }]);
 
   return Occur;
 }(_xfa_object.XFAObject);
@@ -81505,28 +81407,6 @@ var Text = /*#__PURE__*/function (_ContentObject9) {
       _get(_getPrototypeOf(Text.prototype), _xfa_object.$onText, this).call(this, str);
     }
   }, {
-    key: _xfa_object.$finalize,
-    value: function value() {
-      if (typeof this[_xfa_object.$content] === "string") {
-        this[_xfa_object.$content] = this[_xfa_object.$content].replace(/\r\n/g, "\n");
-      }
-    }
-  }, {
-    key: _xfa_object.$getExtra,
-    value: function value() {
-      if (typeof this[_xfa_object.$content] === "string") {
-        return this[_xfa_object.$content].split(/[\u2029\u2028\n]/).reduce(function (acc, line) {
-          if (line) {
-            acc.push(line);
-          }
-
-          return acc;
-        }, []).join("\n");
-      }
-
-      return this[_xfa_object.$content][_xfa_object.$text]();
-    }
-  }, {
     key: _xfa_object.$toHTML,
     value: function value(availableSpace) {
       if (typeof this[_xfa_object.$content] === "string") {
@@ -81954,8 +81834,6 @@ var Value = /*#__PURE__*/function (_XFAObject87) {
         if (parent.ui && parent.ui.imageEdit) {
           if (!this.image) {
             this.image = new Image({});
-
-            this[_xfa_object.$appendChild](this.image);
           }
 
           this.image[_xfa_object.$content] = value[_xfa_object.$content];
@@ -92528,8 +92406,8 @@ Object.defineProperty(exports, "WorkerMessageHandler", ({
 
 var _worker = __w_pdfjs_require__(1);
 
-var pdfjsVersion = '2.11.18';
-var pdfjsBuild = '54005a5d6';
+var pdfjsVersion = '2.10.377';
+var pdfjsBuild = '156762c48';
 })();
 
 /******/ 	return __webpack_exports__;

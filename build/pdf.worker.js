@@ -125,7 +125,7 @@ class WorkerMessageHandler {
     const WorkerTasks = [];
     const verbosity = (0, _util.getVerbosityLevel)();
     const apiVersion = docParams.apiVersion;
-    const workerVersion = '2.11.18';
+    const workerVersion = '2.10.377';
 
     if (apiVersion !== workerVersion) {
       throw new Error(`The API version "${apiVersion}" does not match ` + `the Worker version "${workerVersion}".`);
@@ -592,7 +592,6 @@ class WorkerMessageHandler {
           task,
           intent: data.intent,
           renderInteractiveForms: data.renderInteractiveForms,
-          annotationsNotRendered: data.annotationsNotRendered,
           annotationStorage: data.annotationStorage
         }).then(function (operatorListInfo) {
           finishWorkerTask(task);
@@ -1074,8 +1073,7 @@ const UNSUPPORTED_FEATURES = {
   errorFontLoadNative: "errorFontLoadNative",
   errorFontBuildPath: "errorFontBuildPath",
   errorFontGetPath: "errorFontGetPath",
-  errorMarkedContent: "errorMarkedContent",
-  errorContentSubStream: "errorContentSubStream"
+  errorMarkedContent: "errorMarkedContent"
 };
 exports.UNSUPPORTED_FEATURES = UNSUPPORTED_FEATURES;
 const PasswordResponses = {
@@ -3488,10 +3486,6 @@ var _xref = __w_pdfjs_require__(98);
 const DEFAULT_USER_UNIT = 1.0;
 const LETTER_SIZE_MEDIABOX = [0, 0, 612, 792];
 
-function isAnnotationRenderable(annotation, annotationStorage, annotationIntent, annotationsNotRendered) {
-  return !annotationsNotRendered.includes(annotation.data.id) && (annotationIntent === "display" && annotation.mustBeViewed(annotationStorage) || annotationIntent === "print" && annotation.mustBePrinted(annotationStorage));
-}
-
 class Page {
   constructor({
     pdfManager,
@@ -3637,26 +3631,14 @@ class Page {
     return (0, _util.shadow)(this, "rotate", rotate);
   }
 
-  _onSubStreamError(handler, reason, objId) {
-    if (this.evaluatorOptions.ignoreErrors) {
-      handler.send("UnsupportedFeature", {
-        featureId: _util.UNSUPPORTED_FEATURES.errorContentSubStream
-      });
-      (0, _util.warn)(`getContentStream - ignoring sub-stream (${objId}): "${reason}".`);
-      return;
-    }
-
-    throw reason;
-  }
-
-  getContentStream(handler) {
+  getContentStream() {
     return this.pdfManager.ensure(this, "content").then(content => {
       if (content instanceof _base_stream.BaseStream) {
         return content;
       }
 
       if (Array.isArray(content)) {
-        return new _decode_stream.StreamsSequenceStream(content, this._onSubStreamError.bind(this, handler));
+        return new _decode_stream.StreamsSequenceStream(content);
       }
 
       return new _stream.NullStream();
@@ -3720,10 +3702,9 @@ class Page {
     task,
     intent,
     renderInteractiveForms,
-    annotationStorage,
-    annotationsNotRendered
+    annotationStorage
   }) {
-    const contentStreamPromise = this.getContentStream(handler);
+    const contentStreamPromise = this.getContentStream();
     const resourcesPromise = this.loadResources(["ColorSpace", "ExtGState", "Font", "Pattern", "Properties", "Shading", "XObject"]);
     const partialEvaluator = new _evaluator.PartialEvaluator({
       xref: this.xref,
@@ -3765,7 +3746,7 @@ class Page {
       const opListPromises = [];
 
       for (const annotation of annotations) {
-        if (isAnnotationRenderable(annotation, annotationStorage, annotationIntent, annotationsNotRendered)) {
+        if (annotationIntent === "display" && annotation.mustBeViewed(annotationStorage) || annotationIntent === "print" && annotation.mustBePrinted(annotationStorage)) {
           opListPromises.push(annotation.getOperatorList(partialEvaluator, task, renderInteractiveForms, annotationStorage).catch(function (reason) {
             (0, _util.warn)("getOperatorList - ignoring annotation data during " + `"${task.name}" task: "${reason}".`);
             return null;
@@ -3797,7 +3778,7 @@ class Page {
     sink,
     combineTextItems
   }) {
-    const contentStreamPromise = this.getContentStream(handler);
+    const contentStreamPromise = this.getContentStream();
     const resourcesPromise = this.loadResources(["ExtGState", "Font", "Properties", "XObject"]);
     const dataPromises = Promise.all([contentStreamPromise, resourcesPromise]);
     return dataPromises.then(([contentStream]) => {
@@ -15131,7 +15112,7 @@ class DecodeStream extends _base_stream.BaseStream {
 exports.DecodeStream = DecodeStream;
 
 class StreamsSequenceStream extends DecodeStream {
-  constructor(streams, onError = null) {
+  constructor(streams) {
     let maybeLength = 0;
 
     for (const stream of streams) {
@@ -15140,7 +15121,6 @@ class StreamsSequenceStream extends DecodeStream {
 
     super(maybeLength);
     this.streams = streams;
-    this._onError = onError;
   }
 
   readBlock() {
@@ -15152,20 +15132,7 @@ class StreamsSequenceStream extends DecodeStream {
     }
 
     const stream = streams.shift();
-    let chunk;
-
-    try {
-      chunk = stream.getBytes();
-    } catch (reason) {
-      if (this._onError) {
-        this._onError(reason, stream.dict && stream.dict.objId);
-
-        return;
-      }
-
-      throw reason;
-    }
-
+    const chunk = stream.getBytes();
     const bufferLength = this.bufferLength;
     const newLength = bufferLength + chunk.length;
     const buffer = this.ensureBuffer(newLength);
@@ -57474,10 +57441,6 @@ class XFAObject {
     child[_parent] = this;
 
     this[_children].push(child);
-
-    if (!child[$globalData] && this[$globalData]) {
-      child[$globalData] = this[$globalData];
-    }
   }
 
   [$removeChild](child) {
@@ -57513,10 +57476,6 @@ class XFAObject {
     child[_parent] = this;
 
     this[_children].splice(i, 0, child);
-
-    if (!child[$globalData] && this[$globalData]) {
-      child[$globalData] = this[$globalData];
-    }
   }
 
   [$isTransparent]() {
@@ -59374,10 +59333,6 @@ class Binder {
 
     if (matches.length > 1) {
       baseClone = formNode[_xfa_object.$clone]();
-
-      baseClone[_xfa_object.$removeChild](baseClone.occur);
-
-      baseClone.occur = null;
     }
 
     this._bindValue(formNode, matches[0], picture);
@@ -59401,6 +59356,9 @@ class Binder {
 
       const clone = baseClone[_xfa_object.$clone]();
 
+      clone.occur.min = 1;
+      clone.occur.max = 1;
+      clone.occur.initial = 1;
       parent[name].push(clone);
 
       parent[_xfa_object.$insertAt](pos + i, clone);
@@ -59430,48 +59388,25 @@ class Binder {
 
     const name = formNode[_xfa_object.$nodeName];
 
-    if (!(parent[name] instanceof _xfa_object.XFAObjectArray)) {
-      return;
-    }
+    for (let i = 0, ii = occur.initial; i < ii; i++) {
+      const clone = formNode[_xfa_object.$clone]();
 
-    let currentNumber;
+      clone.occur.min = 1;
+      clone.occur.max = 1;
+      clone.occur.initial = 1;
+      parent[name].push(clone);
 
-    if (formNode.name) {
-      currentNumber = parent[name].children.filter(e => e.name === formNode.name).length;
-    } else {
-      currentNumber = parent[name].children.length;
-    }
-
-    const pos = parent[_xfa_object.$indexOf](formNode) + 1;
-    const ii = occur.initial - currentNumber;
-
-    if (ii) {
-      const nodeClone = formNode[_xfa_object.$clone]();
-
-      nodeClone[_xfa_object.$removeChild](nodeClone.occur);
-
-      nodeClone.occur = null;
-      parent[name].push(nodeClone);
-
-      parent[_xfa_object.$insertAt](pos, nodeClone);
-
-      for (let i = 1; i < ii; i++) {
-        const clone = nodeClone[_xfa_object.$clone]();
-
-        parent[name].push(clone);
-
-        parent[_xfa_object.$insertAt](pos + i, clone);
-      }
+      parent[_xfa_object.$appendChild](clone);
     }
   }
 
   _getOccurInfo(formNode) {
     const {
-      name,
       occur
     } = formNode;
+    const dataName = formNode.name;
 
-    if (!occur || !name) {
+    if (!occur || !dataName) {
       return [1, 1];
     }
 
@@ -59636,6 +59571,11 @@ class Binder {
       }
 
       if (match) {
+        if (match.length < min) {
+          (0, _util.warn)(`XFA - Must have at least ${min} occurrences: ${formNode[_xfa_object.$nodeName]}.`);
+          continue;
+        }
+
         this._bindOccurrences(child, match, picture);
       } else if (min > 0) {
         this._setProperties(child, dataNode);
@@ -61960,8 +61900,6 @@ class Field extends _xfa_object.XFAObject {
 
         if (this.value.exData) {
           value = this.value.exData[_xfa_object.$text]();
-        } else if (this.value.text) {
-          value = this.value.text[_xfa_object.$getExtra]();
         } else {
           const htmlValue = this.value[_xfa_object.$toHTML]().html;
 
@@ -62767,50 +62705,24 @@ class Occur extends _xfa_object.XFAObject {
   constructor(attributes) {
     super(TEMPLATE_NS_ID, "occur", true);
     this.id = attributes.id || "";
-    this.initial = attributes.initial !== "" ? (0, _utils.getInteger)({
+    this.initial = (0, _utils.getInteger)({
       data: attributes.initial,
-      defaultValue: "",
+      defaultValue: 1,
       validate: x => true
-    }) : "";
-    this.max = attributes.max !== "" ? (0, _utils.getInteger)({
+    });
+    this.max = (0, _utils.getInteger)({
       data: attributes.max,
       defaultValue: 1,
       validate: x => true
-    }) : "";
-    this.min = attributes.min !== "" ? (0, _utils.getInteger)({
+    });
+    this.min = (0, _utils.getInteger)({
       data: attributes.min,
       defaultValue: 1,
       validate: x => true
-    }) : "";
+    });
     this.use = attributes.use || "";
     this.usehref = attributes.usehref || "";
     this.extras = null;
-  }
-
-  [_xfa_object.$clean]() {
-    const parent = this[_xfa_object.$getParent]();
-
-    const originalMin = this.min;
-
-    if (this.min === "") {
-      this.min = parent instanceof PageArea || parent instanceof PageSet ? 0 : 1;
-    }
-
-    if (this.max === "") {
-      if (originalMin === "") {
-        this.max = parent instanceof PageArea || parent instanceof PageSet ? -1 : 1;
-      } else {
-        this.max = this.min;
-      }
-    }
-
-    if (this.max !== -1 && this.max < this.min) {
-      this.max = this.min;
-    }
-
-    if (this.initial === "") {
-      this.initial = parent instanceof Template ? 1 : this.min;
-    }
   }
 
 }
@@ -64401,26 +64313,6 @@ class Text extends _xfa_object.ContentObject {
     super[_xfa_object.$onText](str);
   }
 
-  [_xfa_object.$finalize]() {
-    if (typeof this[_xfa_object.$content] === "string") {
-      this[_xfa_object.$content] = this[_xfa_object.$content].replace(/\r\n/g, "\n");
-    }
-  }
-
-  [_xfa_object.$getExtra]() {
-    if (typeof this[_xfa_object.$content] === "string") {
-      return this[_xfa_object.$content].split(/[\u2029\u2028\n]/).reduce((acc, line) => {
-        if (line) {
-          acc.push(line);
-        }
-
-        return acc;
-      }, []).join("\n");
-    }
-
-    return this[_xfa_object.$content][_xfa_object.$text]();
-  }
-
   [_xfa_object.$toHTML](availableSpace) {
     if (typeof this[_xfa_object.$content] === "string") {
       const html = valueToHtml(this[_xfa_object.$content]).html;
@@ -64710,8 +64602,6 @@ class Value extends _xfa_object.XFAObject {
       if (parent.ui && parent.ui.imageEdit) {
         if (!this.image) {
           this.image = new Image({});
-
-          this[_xfa_object.$appendChild](this.image);
         }
 
         this.image[_xfa_object.$content] = value[_xfa_object.$content];
@@ -71998,8 +71888,8 @@ Object.defineProperty(exports, "WorkerMessageHandler", ({
 
 var _worker = __w_pdfjs_require__(1);
 
-const pdfjsVersion = '2.11.18';
-const pdfjsBuild = '54005a5d6';
+const pdfjsVersion = '2.10.377';
+const pdfjsBuild = '156762c48';
 })();
 
 /******/ 	return __webpack_exports__;

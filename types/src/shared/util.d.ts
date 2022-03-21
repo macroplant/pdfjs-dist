@@ -431,7 +431,6 @@ export namespace UNSUPPORTED_FEATURES {
     const errorFontBuildPath: string;
     const errorFontGetPath: string;
     const errorMarkedContent: string;
-    const errorContentSubStream: string;
 }
 export function utf8StringToString(str: any): string;
 export class Util {
